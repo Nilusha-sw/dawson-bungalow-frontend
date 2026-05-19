@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <!-- Background circle -->
+  <circle cx="100" cy="100" r="95" fill="#f5f5f5" stroke="#2c5f2d" stroke-width="2"/>
+  
+  <!-- Roof -->
+  <polygon points="100,40 140,75 160,75 160,85 40,85 40,75 60,75" fill="#2c5f2d"/>
+  
+  <!-- Roof accent (shadow) -->
+  <polygon points="100,40 140,75 160,75 140,75 100,50" fill="#1a3a1b" opacity="0.6"/>
+  
+  <!-- Main building -->
+  <rect x="55" y="85" width="90" height="75" fill="#d4a574" stroke="#2c5f2d" stroke-width="2"/>
+  
+  <!-- Door -->
+  <rect x="85" y="130" width="30" height="35" fill="#8b6f47" stroke="#2c5f2d" stroke-width="1.5"/>
+  <!-- Door handle -->
+  <circle cx="112" cy="147" r="2" fill="#d4a574"/>
+  
+  <!-- Left window -->
+  <rect x="65" y="100" width="20" height="20" fill="#87ceeb" stroke="#2c5f2d" stroke-width="1.5"/>
+  <!-- Window panes -->
+  <line x1="75" y1="100" x2="75" y2="120" stroke="#2c5f2d" stroke-width="0.5"/>
+  <line x1="65" y1="110" x2="85" y2="110" stroke="#2c5f2d" stroke-width="0.5"/>
+  
+  <!-- Right window -->
+  <rect x="115" y="100" width="20" height="20" fill="#87ceeb" stroke="#2c5f2d" stroke-width="1.5"/>
+  <!-- Window panes -->
+  <line x1="125" y1="100" x2="125" y2="120" stroke="#2c5f2d" stroke-width="0.5"/>
+  <line x1="115" y1="110" x2="135" y2="110" stroke="#2c5f2d" stroke-width="0.5"/>
+  
+  <!-- Decorative plant/leaf element -->
+  <g transform="translate(50, 90)">
+    <path d="M 0,10 Q 2,5 4,0 Q 5,5 7,10" fill="none" stroke="#2c5f2d" stroke-width="1.5" stroke-linecap="round"/>
+    <path d="M 8,8 Q 8,4 10,0" fill="none" stroke="#2c5f2d" stroke-width="1.5" stroke-linecap="round"/>
+  </g>
+  
+  <!-- Decorative plant/leaf element on right -->
+  <g transform="translate(145, 90)">
+    <path d="M 0,10 Q 2,5 4,0 Q 5,5 7,10" fill="none" stroke="#2c5f2d" stroke-width="1.5" stroke-linecap="round"/>
+    <path d="M 8,8 Q 8,4 10,0" fill="none" stroke="#2c5f2d" stroke-width="1.5" stroke-linecap="round"/>
+  </g>
+  
+  <!-- Text below -->
+  <text x="100" y="175" font-family="Arial, sans-serif" font-size="12" font-weight="bold" text-anchor="middle" fill="#2c5f2d">DAWSON</text>
+</svg>

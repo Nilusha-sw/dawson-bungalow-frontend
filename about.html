@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us | Dawson Bungalow</title>
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="icon" type="image/svg+xml" href="assets/images/logo.svg">
+    <style>
+        .page-header {
+            background-color: var(--primary-dark);
+            color: white;
+            padding: 5rem 0 3rem;
+            text-align: center;
+        }
+        .page-header h1 {
+            color: white;
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        .about-content {
+            display: flex;
+            gap: 4rem;
+            align-items: center;
+            padding: 4rem 0;
+        }
+        .about-text {
+            flex: 1;
+        }
+        .about-text h2 {
+            font-size: 2.2rem;
+            margin-bottom: 1.5rem;
+        }
+        .about-text p {
+            margin-bottom: 1rem;
+            color: var(--text-light);
+            font-size: 1.05rem;
+        }
+        .about-image {
+            flex: 1;
+            height: 400px;
+            border-radius: var(--radius);
+            overflow: hidden;
+        }
+        @media (max-width: 768px) {
+            .about-content {
+                flex-direction: column;
+            }
+        }
+    </style>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar container">
+        <div class="nav-brand">
+            <a href="index.html">
+                <img src="assets/images/logo.svg" alt="Dawson Bungalow Logo" class="logo">
+                <h1>Dawson<span>Bungalow</span></h1>
+            </a>
+        </div>
+        <button class="mobile-menu-btn" aria-label="Toggle mobile menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="rooms.html">Rooms</a></li>
+            <li><a href="about.html" class="active">About Us</a></li>
+            <li><a href="reviews.html">Reviews</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+        </ul>
+        <div class="nav-actions">
+            <a href="login.html" class="btn btn-outline">Log In</a>
+            <a href="register.html" class="btn btn-primary">Register</a>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <div class="page-header">
+        <div class="container">
+            <h1>Our Story</h1>
+            <p>A heritage of hospitality in the heart of Kadugannawa.</p>
+        </div>
+    </div>
+
+    <!-- About Section -->
+    <section class="container">
+        <div class="about-content">
+            <div class="about-text">
+                <h2>Welcome to Dawson Bungalow</h2>
+                <p>Located near the historical Kadugannawa pass, Dawson Bungalow has been offering sanctuary to weary travelers and vacationing families for generations. Our estate is surrounded by the lush greenery and breathtaking mountain views that Sri Lanka's hill country is legendary for.</p>
+                <p>We pride ourselves on offering a perfect blend of colonial charm and modern amenities. Whether you're here to hike the surrounding trails, visit the nearby botanical gardens, or simply escape the busy city life, Dawson Bungalow provides the ideal serene environment.</p>
+                <p>Our dedicated staff are committed to treating every guest like family, ensuring your stay is memorable, comfortable, and truly relaxing. Come experience genuine Sri Lankan hospitality.</p>
+            </div>
+            <div class="about-image">
+                <img src="assets/images/123.webp" alt="Dawson Bungalow Exterior" style="width: 100%; height: 100%; object-fit: cover;">
+            </div>
+        </div>
+    </section>
+
+    <!-- Property Details Section -->
+    <section class="container" style="padding-bottom: 5rem;">
+        <div class="section-title">
+            <h2>About This Property</h2>
+            <p>Everything you need for a comfortable stay</p>
+        </div>
+        <div class="grid-3">
+            <div style="background: var(--bg-white); padding: 2.5rem; border-radius: var(--radius); box-shadow: var(--shadow-sm);">
+                <h3 style="margin-bottom: 1rem; color: var(--primary);">Comfortable Accommodations</h3>
+                <p style="color: var(--text-light); font-size: 0.95rem;">Kandy Dawson Bungalow in Kadugannawa offers family rooms with air-conditioning, private bathrooms, and balconies. Each room includes a dining table, work desk, and TV.</p>
+            </div>
+            <div style="background: var(--bg-white); padding: 2.5rem; border-radius: var(--radius); box-shadow: var(--shadow-sm);">
+                <h3 style="margin-bottom: 1rem; color: var(--primary);">Exceptional Facilities</h3>
+                <p style="color: var(--text-light); font-size: 0.95rem;">Guests enjoy a free airport shuttle service, garden, terrace, and free WiFi. Additional amenities include a lounge, concierge service, and shared kitchen.</p>
+            </div>
+            <div style="background: var(--bg-white); padding: 2.5rem; border-radius: var(--radius); box-shadow: var(--shadow-sm);">
+                <h3 style="margin-bottom: 1rem; color: var(--primary);">Convenient Location</h3>
+                <p style="color: var(--text-light); font-size: 0.95rem;">Located 38 km from Victoria Reservoir Kandy Seaplane Base, the hotel is near attractions such as Kandy Royal Botanic Gardens (10 km) and Sri Dalada Maligawa (17 km).<br><br><small><i></i></small></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h3>Dawson Bungalow</h3>
+                    <p>Your peaceful escape in the hills of Sri Lanka. Experience genuine hospitality right next to nature.</p>
+                </div>
+                <div class="footer-col" style="padding-left: 2rem;">
+                    <h3>Quick Links</h3>
+                    <a href="index.html">Home</a>
+                    <a href="rooms.html">Rooms & Rates</a>
+                    <a href="about.html">About Us</a>
+                    <a href="reviews.html">Reviews</a>
+                    <a href="contact.html">Contact</a>
+                </div>
+                <div class="footer-col">
+                    <h3>Contact Info</h3>
+                    <p>📍 Kadugannawa, Sri Lanka</p>
+                    <p>📞 077 072 0230</p>
+                    <p>✉️ bookings@dawsonbungalow.com</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                &copy; 2026 Dawson Bungalow. All rights reserved. Built with ❤️ for your perfect stay.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button id="backToTop" class="back-to-top" aria-label="Back to top">
+        <i class='bx bx-chevron-up'></i>
+    </button>
+
+    <script src="assets/js/custom-alert.js"></script>
+    <script src="assets/js/main.js"></script>
+</body>
+</html>

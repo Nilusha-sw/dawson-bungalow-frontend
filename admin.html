@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard | Dawson Bungalow</title>
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="assets/css/admin.css">
+    <link rel="icon" type="image/svg+xml" href="assets/images/logo.svg">
+    <!-- Boxicons for admin icons -->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+
+<body class="admin-body">
+
+    <!-- Admin Sidebar -->
+    <div class="admin-sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <h2>Dawson<span>Admin</span></h2>
+            <button id="close-sidebar" class="mobile-close-btn"><i class='bx bx-x'></i></button>
+        </div>
+        <ul class="sidebar-menu">
+            <li class="active" data-tab="dashboard-tab">
+                <i class='bx bxs-dashboard'></i> Dashboard
+            </li>
+            <li data-tab="add-room-tab">
+                <i class='bx bxs-bed'></i> Rooms
+            </li>
+            <li data-tab="promotions-tab">
+                <i class='bx bxs-tag'></i> Promotions
+            </li>
+            <li data-tab="bookings-tab">
+                <i class='bx bxs-calendar-check'></i> Bookings
+            </li>
+            <li data-tab="reviews-tab">
+                <i class='bx bxs-star'></i> Manage Reviews
+            </li>
+            <li data-tab="profile-tab">
+                <i class='bx bxs-user-circle'></i> My Profile
+            </li>
+            <li>
+                <a href="index.html" style="color: inherit;"><i class='bx bx-home'></i> Back to Site</a>
+            </li>
+            <li style="margin-top: 1rem; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 1rem;">
+                <a href="#" id="admin-logout-btn" style="color: #ff6b6b;"><i class='bx bx-log-out'></i> Log Out</a>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Main Content -->
+    <div class="admin-main">
+        <div class="admin-topbar">
+            <button id="open-sidebar" class="mobile-open-btn"><i class='bx bx-menu'></i></button>
+            <div class="admin-profile">
+                <span>Welcome, Admin</span>
+                <div class="profile-img">A</div>
+            </div>
+        </div>
+
+        <div class="admin-content">
+
+            <!-- Dashboard Tab (Overview) -->
+            <div id="dashboard-tab" class="tab-content active">
+                <h2 class="page-title">Dashboard Overview</h2>
+                <!-- Dashboard Stats Row 1 -->
+                <div class="stats-grid mb-2">
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class='bx bx-bed'></i></div>
+                        <div class="stat-details">
+                            <h3>Total Rooms</h3>
+                            <p id="total-rooms-count">0</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class='bx bx-calendar'></i></div>
+                        <div class="stat-details">
+                            <h3>Total Bookings</h3>
+                            <p id="total-bookings-count">0</p>
+                        </div>
+                    </div>
+                    <div class="stat-card revenue">
+                        <div class="stat-icon"><i class='bx bx-money'></i></div>
+                        <div class="stat-details">
+                            <h3>Total Revenue</h3>
+                            <p id="total-revenue">LKR 0</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Dashboard Stats Row 2 -->
+                <div class="stats-grid mb-2">
+                    <div class="stat-card pending">
+                        <div class="stat-icon"><i class='bx bx-time-five'></i></div>
+                        <div class="stat-details">
+                            <h3>Pending</h3>
+                            <p id="pending-bookings-count">0</p>
+                        </div>
+                    </div>
+                    <div class="stat-card confirmed">
+                        <div class="stat-icon"><i class='bx bx-check-double'></i></div>
+                        <div class="stat-details">
+                            <h3>Confirmed</h3>
+                            <p id="confirmed-bookings-count">0</p>
+                        </div>
+                    </div>
+                    <div class="stat-card cancelled">
+                        <div class="stat-icon"><i class='bx bx-x-circle'></i></div>
+                        <div class="stat-details">
+                            <h3>Cancelled</h3>
+                            <p id="cancelled-bookings-count">0</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Dashboard Stats Row 3 -->
+                <div class="stats-grid mb-2">
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class='bx bx-log-in-circle'></i></div>
+                        <div class="stat-details">
+                            <h3>Check-ins Today</h3>
+                            <p id="checkins-today">0</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class='bx bx-log-out-circle'></i></div>
+                        <div class="stat-details">
+                            <h3>Check-outs Today</h3>
+                            <p id="checkouts-today">0</p>
+                        </div>
+                    </div>
+                    <div class="stat-card occupancy">
+                        <div class="stat-icon"><i class='bx bx-pie-chart-alt-2'></i></div>
+                        <div class="stat-details">
+                            <h3>Occupancy Rate</h3>
+                            <p id="occupancy-rate">0%</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Dashboard Stats Row 4 - Reviews -->
+                <div class="stats-grid mb-2">
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class='bx bx-star'></i></div>
+                        <div class="stat-details">
+                            <h3>Total Reviews</h3>
+                            <p id="total-reviews-count">0</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class='bx bx-trending-up'></i></div>
+                        <div class="stat-details">
+                            <h3>Average Rating</h3>
+                            <p id="average-rating">0.0</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class='bx bx-message-square-detail'></i></div>
+                        <div class="stat-details">
+                            <h3>Recent Reviews</h3>
+                            <p id="recent-reviews-count">0</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Visualization Section -->
+                <div class="dashboard-visuals">
+                    <div class="visual-card calendar-section">
+                        <div class="visual-header">
+                            <h3><i class='bx bx-calendar-event'></i> Booking Calendar</h3>
+                            <div class="calendar-controls">
+                                <button id="prevMonth" class="btn-icon"><i class='bx bx-chevron-left'></i></button>
+                                <span id="currentMonthYear">April 2026</span>
+                                <button id="nextMonth" class="btn-icon"><i class='bx bx-chevron-right'></i></button>
+                            </div>
+                        </div>
+                        <div id="booking-calendar" class="calendar-grid">
+                            <!-- Calendar generated here -->
+                        </div>
+                    </div>
+
+                    <div class="visual-card chart-section">
+                        <div class="visual-header">
+                            <h3><i class='bx bx-line-chart'></i> Booking Trends</h3>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="bookingsChart"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- Daily Revenue -->
+<div class="visual-card chart-section">
+    <div class="visual-header">
+        <h3><i class='bx bx-trending-up'></i> Daily Revenue</h3>
+    </div>
+
+    <div class="chart-container">
+        <canvas id="dailyRevenueChart"></canvas>
+    </div>
+</div>
+                    
+                     <!-- Monthly Revenue -->
+    <div class="visual-card chart-section">
+        <div class="visual-header">
+            <h3><i class='bx bx-bar-chart-alt-2'></i> Monthly Revenue</h3>
+        </div>
+
+        <div class="chart-container">
+            <canvas id="monthlyRevenueChart"></canvas>
+        </div>
+    </div>
+
+    <!-- Yearly Revenue -->
+    <div class="visual-card chart-section">
+        <div class="visual-header">
+            <h3><i class='bx bx-pie-chart-alt'></i> Yearly Revenue</h3>
+        </div>
+
+        <div class="chart-container">
+            <canvas id="yearlyRevenueChart"></canvas>
+        </div>
+    </div>
+
+    <!-- Top Performing Room Types -->
+<div class="visual-card chart-section">
+
+    <div class="visual-header">
+        <h3><i class='bx bx-hotel'></i> Top Performing Room Types</h3>
+    </div>
+
+    <div class="top-room-summary">
+        <div class="room-stat">
+            <span>🏆 Most Booked</span>
+            <strong id="most-booked-room">-</strong>
+        </div>
+
+        <div class="room-stat">
+            <span>💰 Highest Revenue</span>
+            <strong id="highest-revenue-room">-</strong>
+        </div>
+
+        <div class="room-stat">
+            <span>📉 Least Booked</span>
+            <strong id="least-booked-room">-</strong>
+        </div>
+    </div>
+
+    <div class="chart-container">
+        <canvas id="roomPerformanceChart"></canvas>
+    </div>
+
+</div>
+
+                </div>
+
+            </div>
+
+
+            <!-- Promotions Tab -->
+            <div id="promotions-tab" class="tab-content">
+                <div class="rooms-tab-header">
+                    <h2 class="page-title">Active Promotions</h2>
+                    <button id="open-add-promotion-modal" class="btn btn-primary">
+                        <i class='bx bx-plus'></i> Add New Promotion
+                    </button>
+                </div>
+
+                <div id="admin-promotions-container" class="grid-3"></div>
+
+                <!-- Add Promotion Modal -->
+                <div id="add-promotion-modal" class="modal-overlay">
+                    <div class="modal-content" style="max-width: 650px; width: 95%;">
+                        <button class="modal-close" id="close-add-promotion-modal">&times;</button>
+                        <div class="modal-header">
+                            <h2>Add New Promotion</h2>
+                            <p>Enter details for the new promotional offer.</p>
+                        </div>
+
+                        <form id="add-promotion-form">
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label for="promoTitle">Title</label>
+                                    <input type="text" id="promoTitle" placeholder="e.g., Summer Special" required maxlength="100">
+                                </div>
+                                <div class="form-group">
+                                    <label for="promoCode">Promo Code</label>
+                                    <input type="text" id="promoCode" placeholder="e.g., SUMMER26" required maxlength="50" style="text-transform: uppercase;">
+                                </div>
+                                <div class="form-group">
+                                    <label for="promoDiscount">Discount Percentage (%)</label>
+                                    <input type="number" id="promoDiscount" placeholder="e.g., 15" required min="1" max="100" step="1">
+                                </div>
+                                <div class="form-group">
+                                    <label for="promoExpiry">Expiry Date</label>
+                                    <input type="datetime-local" id="promoExpiry" required>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="promoDescription">Description</label>
+                                <textarea id="promoDescription" rows="3" placeholder="Enter promotion description..." required maxlength="500"></textarea>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="promoImage">Banner Image</label>
+                                <input type="file" id="promoImage" accept="image/*" required>
+                                <small style="background-color:#ffe5e5; color:#cc0000; padding:4px 8px; border-radius:4px;">
+                                   Only upload image size below 3MB, larger files take longer to display on the home page.
+                                </small>
+
+                                <div id="promo-image-preview" style="margin-top:10px;"></div>
+                            </div>
+
+                            
+                            <div class="form-group" style="display: flex; align-items: center; gap: 10px; margin-top: 1rem;">
+                                <input type="checkbox" id="promoActive" checked style="width: auto;">
+                                <label for="promoActive" style="margin-bottom: 0;">Make this promotion active immediately</label>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary" id="save-promotion-btn" style="width: 100%; margin-top: 1rem;">
+                                Save Promotion
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- Add Room Tab -->
+            <div id="add-room-tab" class="tab-content">
+                <div class="rooms-tab-header">
+                    <h2 class="page-title">Existing Rooms</h2>
+                    <button id="open-add-room-modal" class="btn btn-primary">
+                        <i class='bx bx-plus'></i> Add New Room
+                    </button>
+                </div>
+
+                <div id="admin-rooms-container" class="grid-3"></div>
+
+                <!-- Add Room Modal -->
+                <div id="add-room-modal" class="modal-overlay">
+                    <div class="modal-content" style="max-width: 850px; width: 95%;">
+                        <button class="modal-close" id="close-add-room-modal">&times;</button>
+                        <div class="modal-header">
+                            <h2>Add New Room</h2>
+                            <p>Enter the details below to add a new room to the bungalow.</p>
+                        </div>
+
+                        <form id="add-room-form">
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label for="roomNumber">Room Number</label>
+                                    <input type="text" id="roomNumber" placeholder="e.g., 201" required pattern="\d{1,4}" inputmode="numeric" maxlength="4" title="Room number must contain 1-4 digits only">
+                                </div>
+                                <div class="form-group">
+                                    <label for="type">Room Type</label>
+                                    <input type="text" id="type" placeholder="e.g., Suite Deluxe" required pattern="^[-A-Za-z\s']{2,50}$" maxlength="50" title="Room type should only contain letters, spaces, apostrophes, or hyphens (2-50 chars).">
+                                </div>
+                                <div class="form-group">
+                                    <label for="pricePerNight">Price Per Night (LKR)</label>
+                                    <input type="number" id="pricePerNight" placeholder="e.g., 18000" required min="100" step="1" title="Price must be at least 100">
+                                </div>
+                                <div class="form-group">
+                                    <label for="capacity">Capacity (Guests)</label>
+                                    <input type="number" id="capacity" placeholder="e.g., 5" required min="1" max="10" step="1">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="description">Description</label>
+                                <textarea id="description" rows="3" placeholder="Enter room description..."
+                                    required minlength="10" maxlength="1000"></textarea>
+                                <small>Minimum 10 characters</small>
+                            </div>
+
+                            <div class="form-group">
+                           <label for="images">Room Images</label>
+                             <input type="file" id="images" multiple accept="image/*" >
+                           <small>Select one or more images (JPG, PNG, etc.). First image will be the cover.</small>
+
+                           <!-- Preview Area -->
+                        <div id="image-preview-container" style="margin-top:10px; display:flex; flex-wrap:wrap; gap:10px;"></div>
+                         </div>
+
+                            <div class="form-group">
+                                <label>Amenities</label>
+                                <div class="amenities-grid" id="amenities-container">
+                                    <label class="checkbox-container"><input type="checkbox" value="WiFi"> Free
+                                        WiFi</label>
+                                    <label class="checkbox-container"><input type="checkbox" value="AC"> Air
+                                        Conditioning</label>
+                                    <label class="checkbox-container"><input type="checkbox" value="TV"> Flat-screen
+                                        TV</label>
+                                    <label class="checkbox-container"><input type="checkbox" value="Room Service"> Room
+                                        Service</label>
+                                    <label class="checkbox-container"><input type="checkbox" value="Hot Water"> Hot
+                                        Water</label>
+                                    <label class="checkbox-container"><input type="checkbox" value="Balcony View"> Balcony
+                                        View</label>
+                                    <label class="checkbox-container"><input type="checkbox" value="Work Desk"> Work
+                                        Desk</label>
+                                    <label class="checkbox-container"><input type="checkbox" value="Private Bathroom"> Private
+                                        Bathroom</label>
+                                </div>
+                            </div>
+
+                            <div class="modal-header" 
+                               style="background-color: #ffe5e5; padding: 8px 18px; border-radius: 8px;">
+                             <p style="color: #cc0000; margin: 0;">
+                             <strong>Note:</strong> Uploading new images may take 5–10 seconds and only upload images size below 3MB if not it will take lots of time to show in rooms page.
+                                </p>
+                              </div>
+
+
+                            <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 1rem;">Save
+                                Room</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- View Bookings Tab -->
+            <div id="bookings-tab" class="tab-content">
+                <div class="rooms-tab-header">
+                    <h2 class="page-title">Recent Bookings</h2>
+                    <div class="booking-filters" style="display: flex; gap: 1rem; align-items: center;">
+                        <div class="search-box">
+                            <i class='bx bx-search'></i>
+                            <input type="text" id="booking-search" placeholder="Search" class="filter-input">
+                        </div>
+                        <select id="booking-status-filter" class="filter-select">
+                            <option value="all">All Bookings</option>
+                            <option value="pending">Pending</option>
+                            <option value="confirmed">Confirmed</option>
+                            <option value="cancelled">Cancelled</option>
+                        </select>
+                    </div>
+                </div>
+
+
+
+                <div class="table-container">
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>Guest</th>
+                                <th>Phone</th>
+                                <th>Room No</th>
+                                <th>Guests</th>
+                                <th>Check In</th>
+                                <th>Check Out</th>
+                                <th>Special Requests</th>
+                                <th>Total Price</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="bookings-table-body">
+                            <!-- Bookings will be dynamically populated here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Manage Reviews Tab -->
+            <div id="reviews-tab" class="tab-content">
+                <h2 class="page-title">Manage Reviews</h2>
+                <div id="admin-reviews-container">
+                    <!-- Reviews will be loaded here -->
+                </div>
+            </div>
+
+            <!-- Admin Profile Tab -->
+            <div id="profile-tab" class="tab-content">
+                <h2 class="page-title">My Profile</h2>
+                <div style="max-width:520px;">
+                    <div style="background:var(--bg-white);border-radius:var(--radius);box-shadow:var(--shadow-sm);overflow:hidden;">
+                        <!-- Green header -->
+                        <div style="background:var(--primary);padding:2rem;text-align:center;">
+                            <div id="admin-profile-avatar" style="width:80px;height:80px;border-radius:50%;background:rgba(255,255,255,0.2);border:3px solid rgba(255,255,255,0.5);display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700;color:white;margin:0 auto 1rem;">A</div>
+                            <h3 id="admin-display-name" style="color:white;margin:0;font-size:1.3rem;">Admin User</h3>
+                            <p id="admin-display-role" style="color:rgba(255,255,255,0.8);margin:0.3rem 0 0;font-size:0.85rem;text-transform:uppercase;letter-spacing:1px;">Administrator</p>
+                        </div>
+                        <!-- Detail rows -->
+                        <div style="padding:1.5rem;">
+                            <div style="display:flex;justify-content:space-between;align-items:center;padding:0.85rem 0;border-bottom:1px solid #f0f0f0;">
+                                <span style="color:var(--text-light);font-size:0.9rem;"><i class='bx bx-user' style="margin-right:0.4rem;"></i>Full Name</span>
+                                <strong id="admin-display-name-2">—</strong>
+                            </div>
+                            <div style="display:flex;justify-content:space-between;align-items:center;padding:0.85rem 0;border-bottom:1px solid #f0f0f0;">
+                                <span style="color:var(--text-light);font-size:0.9rem;"><i class='bx bx-envelope' style="margin-right:0.4rem;"></i>Email</span>
+                                <strong id="admin-display-email">—</strong>
+                            </div>
+                            <div style="display:flex;justify-content:space-between;align-items:center;padding:0.85rem 0;border-bottom:1px solid #f0f0f0;">
+                                <span style="color:var(--text-light);font-size:0.9rem;"><i class='bx bx-phone' style="margin-right:0.4rem;"></i>Phone</span>
+                                <strong id="admin-display-phone">—</strong>
+                            </div>
+                            <div style="display:flex;justify-content:space-between;align-items:center;padding:0.85rem 0;">
+                                <span style="color:var(--text-light);font-size:0.9rem;"><i class='bx bx-lock' style="margin-right:0.4rem;"></i>Password</span>
+                                <strong>••••••••</strong>
+                            </div>
+                            <button id="open-edit-profile-btn" class="btn btn-primary" style="width:100%;margin-top:1.5rem;">
+                                <i class='bx bx-edit'></i> Edit Profile
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Edit Profile Modal -->
+    <div id="edit-profile-modal" class="modal-overlay">
+        <div class="modal-content" style="max-width:480px;width:95%;">
+            <button id="close-edit-profile-modal" class="modal-close">&times;</button>
+            <div class="modal-header">
+                <h2>Edit Profile</h2>
+                <p>Update your account details below.</p>
+            </div>
+            <div id="profile-edit-error" style="display:none;background:#fff0f0;color:#c0392b;border:1px solid #f5c6c6;border-radius:8px;padding:0.75rem 1rem;font-size:0.9rem;margin-bottom:1rem;"></div>
+            <div id="profile-edit-success" style="display:none;background:#f0fff4;color:#276749;border:1px solid #c3e6cb;border-radius:8px;padding:0.75rem 1rem;font-size:0.9rem;margin-bottom:1rem;"></div>
+            <div class="form-group">
+                <label for="admin-edit-name">Full Name</label>
+                <input type="text" id="admin-edit-name" placeholder="Enter full name" required pattern="^[A-Za-z\s'\-]{2,100}$" maxlength="100" title="Full name should only contain letters, spaces, apostrophes, or hyphens.">
+            </div>
+            <div class="form-group">
+                <label for="admin-edit-email">Email Address</label>
+                <input type="email" id="admin-edit-email" placeholder="Enter email address" required>
+            </div>
+            <div class="form-group">
+                <label for="admin-edit-phone">Phone Number</label>
+                <input type="tel" id="admin-edit-phone" placeholder="+94771234567"
+                    inputmode="tel"
+                    pattern="^\+?[0-9\s\-()]{10,20}$"
+                    maxlength="20"
+                    title="Enter a valid phone number with exactly 10 digits, optional +, spaces, hyphens, or parentheses"
+                    oninput="this.value = this.value.replace(/[^0-9+\s\-()]/g, '')">
+            </div>
+
+            <!-- Password Change Section -->
+            <div style="margin:1.5rem 0 0.5rem; padding-top:1rem; border-top:1px solid #f0f0f0;">
+                <p style="font-size:0.85rem; color:var(--text-light); margin-bottom:1rem;">
+                    <i class='bx bx-lock-alt'></i> Change Password <em>(optional — leave blank to keep current)</em>
+                </p>
+                <div class="form-group">
+                    <label for="admin-edit-old-password">Current Password</label>
+                    <input type="password" id="admin-edit-old-password" placeholder="Enter current password" minlength="6">
+                </div>
+                <div class="form-group">
+                    <label for="admin-edit-new-password">New Password</label>
+                    <input type="password" id="admin-edit-new-password" placeholder="Min 6 characters" minlength="6">
+                </div>
+                <div class="form-group">
+                    <label for="admin-edit-confirm-password">Confirm New Password</label>
+                    <input type="password" id="admin-edit-confirm-password" placeholder="Repeat new password" minlength="6">
+                </div>
+            </div>
+
+            <div style="display:flex;gap:0.75rem;margin-top:1rem;">
+                <button id="admin-save-profile-btn" class="btn btn-primary" style="flex:1;">Save Changes</button>
+                <button id="cancel-edit-profile-btn" class="btn btn-outline" style="flex:1;">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification Toast -->
+    <div id="toast" class="toast">Operation Successful!</div>
+
+    <script src="assets/js/custom-alert.js"></script>
+    <script src="assets/js/admin.js"></script>
+</body>
+
+</html>

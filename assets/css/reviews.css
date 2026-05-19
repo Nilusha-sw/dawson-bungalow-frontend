@@ -1,0 +1,224 @@
+/* Reviews Page Styles */
+
+.reviews-section {
+  padding-bottom: 6rem;
+}
+
+.reviews-wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  padding: 4rem 0;
+  align-items: flex-start;
+}
+
+.review-form-container {
+  background: var(--bg-white);
+  padding: 2.5rem;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-md);
+  position: sticky;
+  top: 2rem;
+}
+
+.review-form-container h2 {
+  font-size: 1.8rem;
+  margin-bottom: 0.5rem;
+  text-align: left;
+}
+
+.review-form-container p {
+  color: var(--text-light);
+  margin-bottom: 2rem;
+  text-align: left;
+}
+
+.star-rating-input {
+  display: flex;
+  gap: 0.5rem;
+  font-size: 2rem;
+  color: #e0e0e0;
+  cursor: pointer;
+  margin-bottom: 0.5rem;
+}
+
+.star-rating-input .star.active {
+  color: #ffc107;
+}
+
+.star-rating-input .star:hover,
+.star-rating-input .star:hover ~ .star {
+  /* Requires changing JS or changing direction for hover trick, we'll handle hover cleanly in JS */
+}
+
+/* Reviews List Container */
+.reviews-list-container {
+}
+
+.reviews-list-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--border-color);
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+
+.reviews-list-header h2 {
+  font-size: 1.8rem;
+}
+
+.average-rating-display {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.avg-score {
+  font-size: 1.5rem;
+  font-weight: 700;
+  font-family: 'Outfit', sans-serif;
+  color: var(--primary);
+}
+
+.fixed-stars {
+  color: #ffc107;
+  font-size: 1.2rem;
+  letter-spacing: 2px;
+}
+
+.total-reviews {
+  color: var(--text-light);
+  font-size: 0.9rem;
+}
+
+/* Individual Review Card */
+.review-card {
+  background: var(--bg-white);
+  padding: 2rem;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+  margin-bottom: 1.5rem;
+  transition: var(--transition);
+}
+
+.review-card:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+
+.review-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+  position: relative;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.delete-review-btn {
+  background: none;
+  border: none;
+  color: #dc3545;
+  font-size: 1.4rem;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 50%;
+  transition: var(--transition);
+}
+
+.delete-review-btn:hover {
+  background-color: rgba(220, 53, 69, 0.1);
+  transform: scale(1.1);
+}
+
+.delete-review-btn {
+  background: none;
+  border: none;
+  color: #dc3545; /* Changed to a stronger red */
+  font-size: 1.4rem; /* Slightly larger */
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 50%;
+  transition: var(--transition);
+}
+
+.delete-review-btn:hover {
+  background-color: rgba(220, 53, 69, 0.1);
+  transform: scale(1.1);
+}
+
+.reviewer-info {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.reviewer-avatar {
+  width: 45px;
+  height: 45px;
+  background-color: var(--primary-light);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-family: 'Outfit', sans-serif;
+  font-size: 1.2rem;
+}
+
+.reviewer-details h4 {
+  font-size: 1.1rem;
+  margin-bottom: 0.2rem;
+  color: var(--text-main);
+}
+
+.review-date {
+  font-size: 0.8rem;
+  color: var(--text-light);
+}
+
+.review-stars {
+  color: #ffc107;
+  font-size: 1rem;
+  letter-spacing: 2px;
+}
+
+.review-text {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--text-main);
+}
+
+/* Responsive Styles */
+@media (max-width: 900px) {
+  .reviews-wrapper {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  
+  .review-form-container {
+    position: static;
+    padding: 1.5rem;
+  }
+  
+  .review-form-container h2,
+  .reviews-list-header h2 {
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .reviews-list-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .star-rating-input {
+    font-size: 1.5rem;
+  }
+}

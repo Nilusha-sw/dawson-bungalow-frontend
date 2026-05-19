@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reviews | Dawson Bungalow</title>
+    <meta name="description"
+        content="Read what our guests have to say about their stay at Dawson Bungalow. Leave your own review and share your experience.">
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="assets/css/reviews.css">
+    <link rel="icon" type="image/svg+xml" href="assets/images/logo.svg">
+    <!-- Include FontAwesome for Star Icons (Optional, we can use unicode, but FA looks better. Let's stick to unicode for simplicity or include a CDN if needed. I'll use simple unicode start styled with CSS.) -->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar container">
+        <div class="nav-brand">
+            <a href="index.html">
+                <img src="assets/images/logo.svg" alt="Dawson Bungalow Logo" class="logo">
+                <h1>Dawson<span>Bungalow</span></h1>
+            </a>
+        </div>
+        <button class="mobile-menu-btn" aria-label="Toggle mobile menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="rooms.html">Rooms</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="reviews.html" class="active">Reviews</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+        </ul>
+        <div class="nav-actions">
+            <a href="login.html" class="btn btn-outline">Log In</a>
+            <a href="register.html" class="btn btn-primary">Register</a>
+        </div>
+    </nav>
+
+    <header class="page-header"
+        style="background-color: var(--primary-dark); color: white; padding: 4rem 0; text-align: center;">
+        <div class="container">
+            <h1 style="color: white; font-size: 3rem; margin-bottom: 1rem;">Guest Reviews</h1>
+            <p style="opacity: 0.9; font-size: 1.1rem; max-width: 600px; margin: 0 auto;">Discover the experiences of
+                those who have stayed with us, or share your own thoughts below.</p>
+        </div>
+    </header>
+
+    <!-- Reviews Section -->
+    <section class="container reviews-section">
+        <div class="reviews-wrapper">
+
+            <!-- Add a Review Form -->
+            <div class="review-form-container">
+                <h2>Leave a Review</h2>
+                <p>We'd love to hear about your stay!</p>
+
+                <form id="add-review-form" class="review-form">
+                    <div class="form-group">
+                        <label for="reviewer-name">Your Name</label>
+                        <input type="text" id="reviewer-name" required placeholder="John Doe" pattern="^[A-Za-z\s'\-]{2,100}$" maxlength="100" title="Name should only contain letters, spaces, apostrophes, or hyphens.">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Rating</label>
+                        <div class="star-rating-input" id="star-rating-input">
+                            <span class="star" data-value="1">★</span>
+                            <span class="star" data-value="2">★</span>
+                            <span class="star" data-value="3">★</span>
+                            <span class="star" data-value="4">★</span>
+                            <span class="star" data-value="5">★</span>
+                        </div>
+                        <input type="hidden" id="review-rating" value="0" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="review-text">Your Comment</label>
+                        <textarea id="review-text" rows="4" required minlength="10" maxlength="1000"
+                            placeholder="Tell us what you loved about your stay..."></textarea>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Submit Review</button>
+                </form>
+            </div>
+
+            <!-- Reviews List -->
+            <div class="reviews-list-container">
+                <div class="reviews-list-header">
+                    <h2>Recent Reviews</h2>
+                    <div class="average-rating-display">
+                        <span class="avg-score" id="avg-score">0.0</span>
+                        <div class="fixed-stars">
+                            ★★★★★
+                        </div>
+                        <span class="total-reviews" id="total-reviews">(0 reviews)</span>
+                    </div>
+                </div>
+
+                <div id="reviews-container">
+                    <!-- Reviews will be injected here by JS -->
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h3>Dawson Bungalow</h3>
+                    <p>Your peaceful escape in the hills of Sri Lanka. Experience genuine hospitality right next to
+                        nature.</p>
+                </div>
+                <div class="footer-col" style="padding-left: 2rem;">
+                    <h3>Quick Links</h3>
+                    <a href="index.html">Home</a>
+                    <a href="rooms.html">Rooms & Rates</a>
+                    <a href="about.html">About Us</a>
+                    <a href="reviews.html">Reviews</a>
+                    <a href="contact.html">Contact</a>
+                </div>
+                <div class="footer-col">
+                    <h3>Contact Info</h3>
+                    <p>📍 Kadugannawa, Sri Lanka</p>
+                    <p>📞 077 072 0230</p>
+                    <p>✉️ bookings@dawsonbungalow.com</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                &copy; 2026 Dawson Bungalow. All rights reserved. Built with ❤️ for your perfect stay.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button id="backToTop" class="back-to-top" aria-label="Back to top">
+        <i class='bx bx-chevron-up'></i>
+    </button>
+
+    <script src="assets/js/custom-alert.js"></script>
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/reviews.js"></script>
+</body>
+
+</html>

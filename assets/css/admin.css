@@ -1,0 +1,1060 @@
+/* admin.css - Admin Panel Styling */
+
+.admin-body {
+    display: flex;
+    min-height: 100vh;
+    background-color: #f4f6f8;
+    overflow-x: hidden;
+    font-family: 'Inter', sans-serif;
+}
+
+/* Sidebar */
+.admin-sidebar {
+    width: 260px;
+    background-color: var(--primary-dark);
+    color: white;
+    position: fixed;
+    height: 100vh;
+    left: 0;
+    top: 0;
+    z-index: 100;
+    transition: var(--transition);
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar-header {
+    padding: 2rem 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.sidebar-header h2 {
+    color: white;
+    font-size: 1.5rem;
+    margin: 0;
+}
+
+.sidebar-header span {
+    color: var(--secondary);
+}
+
+.sidebar-menu {
+    padding: 1.5rem 0;
+    list-style: none;
+}
+
+.sidebar-menu li {
+    padding: 1rem 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: var(--transition);
+    color: rgba(255, 255, 255, 0.7);
+}
+
+/* Action Buttons */
+.btn-confirm,
+.btn-cancel {
+    padding: 6px 12px;
+    border: none;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    margin-right: 5px;
+}
+
+/* Confirm Button */
+.btn-confirm {
+    background-color: #28a745;
+    color: white;
+}
+
+.btn-confirm:hover {
+    background-color: #218838;
+    transform: translateY(-1px);
+}
+
+/* Cancel Button */
+.btn-cancel {
+    background-color: #dc3545;
+    color: white;
+}
+
+.btn-cancel:hover {
+    background-color: #c82333;
+    transform: translateY(-1px);
+}
+
+.status-pending {
+    background-color: #ffc107;
+    color: #333;
+}
+
+.status-confirmed {
+    background-color: #28a745;
+    color: white;
+}
+
+.status-cancelled {
+    background-color: #dc3545;
+    color: white;
+}
+
+
+
+.sidebar-menu li i {
+    font-size: 1.25rem;
+}
+
+.sidebar-menu li:hover,
+.sidebar-menu li.active {
+    background-color: rgba(255, 255, 255, 0.05);
+    color: white;
+    border-left: 4px solid var(--secondary);
+}
+
+.sidebar-menu li:not(.active) {
+    border-left: 4px solid transparent;
+}
+
+.mobile-close-btn {
+    display: none;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+/* Main Content */
+.admin-main {
+    flex: 1;
+    margin-left: 260px;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    transition: var(--transition);
+    min-width: 0; /* CRITICAL for horizontal scroll support */
+}
+
+.admin-topbar {
+    height: 70px;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 0 2rem;
+    box-shadow: var(--shadow-sm);
+    position: sticky;
+    top: 0;
+    z-index: 90;
+}
+
+.mobile-open-btn {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: var(--text-main);
+    cursor: pointer;
+    margin-right: auto;
+}
+
+.admin-profile {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-weight: 500;
+}
+
+.profile-img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: var(--primary);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+.admin-content {
+    padding: 2rem;
+    flex: 1;
+}
+
+.page-title {
+    margin-bottom: 0;
+    font-size: 1.8rem;
+    color: var(--text-main);
+}
+
+.rooms-tab-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.tab-content {
+    display: none;
+    animation: fadeIn 0.3s ease;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+
+/* Dashboard Stats */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+}
+
+.stat-card {
+    background-color: white;
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    box-shadow: var(--shadow-sm);
+}
+
+.stat-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 12px;
+    background-color: rgba(33, 79, 54, 0.1);
+    color: var(--primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+}
+
+.stat-details h3 {
+    font-size: 0.95rem;
+    color: var(--text-light);
+    margin-bottom: 0.3rem;
+}
+
+.stat-details p {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-main);
+    margin: 0;
+}
+
+.mb-2 { margin-bottom: 2rem; }
+
+/* Status Colors for Stats */
+.stat-card.pending .stat-icon { background-color: rgba(245, 158, 11, 0.1); color: #f59e0b; }
+.stat-card.confirmed .stat-icon { background-color: rgba(16, 185, 129, 0.1); color: #10b981; }
+.stat-card.cancelled .stat-icon { background-color: rgba(239, 68, 68, 0.1); color: #ef4444; }
+.stat-card.revenue .stat-icon { background-color: rgba(16, 185, 129, 0.1); color: #10b981; }
+.stat-card.occupancy .stat-icon { background-color: rgba(59, 130, 246, 0.1); color: #3b82f6; }
+
+/* Dashboard Visuals */
+.dashboard-visuals {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin-top: 1rem;
+}
+
+@media (max-width: 1200px) {
+    .dashboard-visuals { grid-template-columns: 1fr; }
+}
+
+.visual-card {
+    background: white;
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    box-shadow: var(--shadow-sm);
+    overflow: hidden;
+}
+
+@media (max-width: 768px) {
+    .visual-card {
+        padding: 1rem;
+    }
+    
+    .visual-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+    
+    .calendar-grid {
+        gap: 2px;
+    }
+    
+    .cal-day {
+        font-size: 0.75rem;
+    }
+}
+
+.visual-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.visual-header h3 {
+    font-size: 1.1rem;
+    color: var(--text-main);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.calendar-controls {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.calendar-controls span {
+    font-weight: 600;
+    font-size: 0.9rem;
+    min-width: 100px;
+    text-align: center;
+}
+
+.btn-icon {
+    background: #f4f6f8;
+    border: none;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.btn-icon:hover { background: var(--primary-light); color: white; }
+
+/* Calendar Grid */
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 5px;
+}
+
+.cal-day-head {
+    text-align: center;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--text-light);
+    padding-bottom: 10px;
+}
+
+.cal-day {
+    aspect-ratio: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    position: relative;
+    border: 1px solid #f1f1f1;
+}
+
+.cal-day.today {
+    background-color: rgba(33, 79, 54, 0.05);
+    border-color: var(--primary);
+    font-weight: 700;
+}
+
+.cal-booking-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: var(--primary);
+    margin-top: 3px;
+}
+
+.cal-day.other-month { opacity: 0.3; }
+
+.chart-container {
+    height: 300px;
+    width: 100%;
+}
+
+/* Form Styling */
+.form-container {
+    background-color: white;
+    padding: 2rem;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-sm);
+    max-width: 800px;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+}
+
+.form-group small {
+    display: block;
+    color: var(--text-light);
+    margin-top: 0.3rem;
+    font-size: 0.8rem;
+}
+
+.amenities-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 1rem;
+    margin-top: 0.5rem;
+}
+
+.checkbox-container {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.95rem;
+    cursor: pointer;
+}
+
+.checkbox-container input {
+    width: 18px;
+    height: 18px;
+    accent-color: var(--primary);
+}
+
+/* Table Styling */
+.table-container {
+    background-color: white;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-sm);
+    overflow-x: auto;
+    scrollbar-width: thin;
+    scrollbar-color: var(--primary-light) #f1f1f1;
+}
+
+@media (max-width: 768px) {
+    .table-container {
+        overflow-x: auto;
+        background: white;
+        box-shadow: var(--shadow-sm);
+        border-radius: var(--radius);
+    }
+}
+
+.table-container::-webkit-scrollbar {
+    height: 6px;
+}
+
+.table-container::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+
+.table-container::-webkit-scrollbar-thumb {
+    background: #ccc;
+    border-radius: 10px;
+}
+
+.table-container::-webkit-scrollbar-thumb:hover {
+    background: var(--primary-light);
+}
+
+.admin-table {
+    width: 100%;
+    min-width: 1100px; /* Force overflow for sliding */
+    border-collapse: collapse;
+}
+
+.admin-table th,
+.admin-table td {
+    padding: 1.2rem 1.5rem;
+    text-align: left;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.admin-table tbody tr {
+    transition: background-color 0.2s ease;
+}
+
+.admin-table tbody tr:hover {
+    background-color: #fafbfc;
+}
+
+
+
+.admin-table th {
+    background-color: #f9fbfc;
+    padding: 1.2rem 1rem;
+    font-weight: 700;
+    color: var(--primary-dark);
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-bottom: 2px solid var(--border-color);
+}
+
+.admin-table td {
+    font-size: 0.95rem;
+}
+
+.status-badge {
+    padding: 0.4rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+/* Booking Stats & Filters */
+.booking-stats-row {
+    display: flex;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+}
+
+.b-stat {
+    background: #fff;
+    padding: 1rem 1.5rem;
+    border-radius: var(--radius);
+    display: flex;
+    flex-direction: column;
+    min-width: 120px;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid rgba(0, 0, 0, 0.02);
+}
+
+.b-stat-label {
+    font-size: 0.8rem;
+    color: var(--text-light);
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+.b-stat-value {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--primary-dark);
+}
+
+.filter-select {
+    padding: 0.6rem 1rem;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    background-color: #fff;
+    font-family: inherit;
+    font-size: 0.9rem;
+    color: var(--text-main);
+    cursor: pointer;
+    outline: none;
+    transition: var(--transition);
+}
+
+.filter-select:focus {
+    border-color: var(--primary);
+}
+
+.booking-filters {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.search-box {
+    position: relative;
+    display: flex;
+    align-items: center;
+    flex: 1;
+    min-width: 220px;
+}
+
+.search-box i {
+    position: absolute;
+    left: 1rem;
+    color: var(--text-light);
+    font-size: 1.1rem;
+}
+
+.filter-input {
+    width: 100%;
+    padding: 0.65rem 1rem 0.65rem 2.8rem;
+    border-radius: 10px;
+    border: 1px solid var(--border-color);
+    background-color: white;
+    font-family: inherit;
+    font-size: 0.9rem;
+    color: var(--text-main);
+    transition: all 0.3s ease;
+    box-shadow: var(--shadow-sm);
+}
+
+.filter-input:focus {
+    border-color: var(--primary);
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(33, 79, 54, 0.1);
+}
+
+.filter-select {
+    padding: 0.65rem 1rem;
+    border-radius: 10px;
+    border: 1px solid var(--border-color);
+    background-color: white;
+    font-family: inherit;
+    font-size: 0.9rem;
+    color: var(--text-main);
+    cursor: pointer;
+    min-width: 160px;
+    box-shadow: var(--shadow-sm);
+}
+
+@media (max-width: 768px) {
+    .booking-filters {
+        flex-direction: column;
+        align-items: stretch;
+        width: 100%;
+    }
+}
+
+
+
+/* Guest Info in Table */
+.guest-info {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+}
+
+.guest-avatar {
+    width: 32px;
+    height: 32px;
+    background-color: var(--primary-light);
+    color: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.status-confirmed {
+    background-color: rgba(40, 167, 69, 0.1);
+    color: #28a745;
+}
+
+.status-pending {
+    background-color: rgba(255, 193, 7, 0.1);
+    color: #ffc107;
+}
+
+.status-cancelled {
+    background-color: rgba(220, 53, 69, 0.1);
+    color: #dc3545;
+}
+
+.status-cell-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    width: 100%;
+}
+
+.status-actions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+/* Admin Review Cards */
+.admin-review-card {
+    background-color: white;
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+    box-shadow: var(--shadow-sm);
+    border-left: 4px solid var(--primary);
+}
+
+.admin-review-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+}
+
+.admin-reviewer-info h4 {
+    font-size: 1.1rem;
+    margin-bottom: 0.2rem;
+    color: var(--text-main);
+}
+
+.admin-review-date {
+    font-size: 0.8rem;
+    color: var(--text-light);
+}
+
+.admin-review-stars {
+    color: #ffc107;
+    font-size: 1rem;
+    letter-spacing: 2px;
+}
+
+.admin-delete-btn {
+    background-color: #ff6b6b;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: var(--radius);
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: var(--transition);
+}
+
+.admin-delete-btn:hover {
+    background-color: #e55a5a;
+}
+
+.admin-review-text {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--text-main);
+}
+
+/* Toast Notification */
+.toast {
+    position: fixed;
+    top: 25px;
+    right: 25px;
+    background: #fff;
+    padding: 20px 15px 20px 25px;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    border-left: 6px solid var(--primary);
+    overflow: hidden;
+    transform: translateX(calc(100% + 30px));
+    transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.35);
+    z-index: 1000;
+    min-width: 300px;
+}
+
+.toast.show {
+    transform: translateX(0);
+}
+
+.toast.error {
+    border-left-color: #ff3333;
+}
+
+.toast.warning {
+    border-left-color: #ff9800;
+}
+
+.toast-content {
+    display: flex;
+    align-items: center;
+}
+
+.toast-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 35px;
+    width: 35px;
+    background-color: var(--primary);
+    color: #fff;
+    font-size: 20px;
+    border-radius: 50%;
+}
+
+.toast.error .toast-icon { background-color: #ff3333; }
+.toast.warning .toast-icon { background-color: #ff9800; }
+
+.toast-message {
+    display: flex;
+    flex-direction: column;
+    margin: 0 20px;
+}
+
+.toast-text {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-main);
+}
+
+.toast-progress {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 3px;
+    width: 100%;
+    background: #ddd;
+}
+
+.toast-progress::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+    background-color: var(--primary);
+}
+
+.toast.error .toast-progress::before { background-color: #ff3333; }
+.toast.warning .toast-progress::before { background-color: #ff9800; }
+
+.toast-progress.active::before {
+    animation: progress 3s linear forwards;
+}
+
+@keyframes progress {
+    100% {
+        right: 100%;
+    }
+}
+
+/* Responsive Admin */
+@media (max-width: 992px) {
+    .admin-sidebar {
+        transform: translateX(-100%);
+    }
+
+    .admin-sidebar.open {
+        transform: translateX(0);
+    }
+
+    .admin-main {
+        margin-left: 0;
+    }
+
+    .mobile-open-btn,
+    .mobile-close-btn {
+        display: block;
+    }
+}
+
+/* Mobile Card Layout for Admin Tables */
+@media (max-width: 768px) {
+
+    /* ── Table resets ── */
+    .admin-table thead {
+        display: none;
+    }
+
+    .admin-table {
+        min-width: 0 !important;
+    }
+    
+    .table-container {
+        overflow-x: visible !important;
+        background: transparent !important;
+        box-shadow: none !important;
+        border-radius: 0 !important;
+    }
+
+    .admin-table,
+    .admin-table tbody,
+    .admin-table tr,
+    .admin-table td {
+        display: block;
+        width: 100%;
+    }
+
+    /* ── Each row = a premium card ── */
+    .admin-table tr {
+        margin-bottom: 1.2rem;
+        border-radius: 14px;
+        background: #fff;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+        overflow: hidden;
+        border: none;
+        position: relative;
+        /* Colored left bar based on booking status */
+        border-left: 5px solid #e0e0e0;
+    }
+
+    /* Status-colored left border */
+    .admin-table tr[data-status="pending"] {
+        border-left-color: #f59e0b;
+    }
+
+    .admin-table tr[data-status="confirmed"] {
+        border-left-color: #10b981;
+    }
+
+    .admin-table tr[data-status="cancelled"] {
+        border-left-color: #ef4444;
+    }
+
+    /* ── First cell (Guest) gets a header treatment ── */
+    .admin-table td:first-child {
+        background: linear-gradient(135deg, var(--primary-dark) 0%, #2d6a4f 100%);
+        padding: 1rem 1.2rem;
+        border-bottom: none;
+    }
+
+    .admin-table td:first-child::before {
+        color: rgba(255, 255, 255, 0.6);
+    }
+
+    .admin-table td:first-child .guest-info {
+        justify-content: flex-start;
+        gap: 0.8rem;
+    }
+
+    .admin-table td:first-child .guest-avatar {
+        width: 42px;
+        height: 42px;
+        font-size: 1rem;
+        background-color: rgba(255, 255, 255, 0.2);
+        border: 2px solid rgba(255, 255, 255, 0.4);
+    }
+
+    .admin-table td:first-child .guest-info span {
+        color: #fff;
+        font-size: 1rem;
+        font-weight: 600;
+    }
+
+    /* ── Regular cells: label left, value right ── */
+    .admin-table td {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0.7rem 1.2rem;
+        border-bottom: 1px solid #f0f2f5;
+        font-size: 0.9rem;
+        gap: 1rem;
+        color: var(--text-main);
+    }
+
+    .admin-table td:last-child {
+        border-bottom: none;
+        padding: 0.9rem 1.2rem;
+        background-color: #fafbfc;
+    }
+
+    .admin-table td::before {
+        content: attr(data-label);
+        font-weight: 700;
+        color: var(--text-light);
+        text-transform: uppercase;
+        font-size: 0.7rem;
+        letter-spacing: 0.6px;
+        white-space: nowrap;
+        flex-shrink: 0;
+    }
+
+    /* Status badge */
+    .admin-table td .status-badge {
+        font-size: 0.78rem;
+        padding: 0.3rem 0.8rem;
+    }
+
+    /* ── Action buttons: full-width, side by side ── */
+    .admin-table td .status-actions {
+        display: flex;
+        gap: 0.6rem;
+        width: 100%;
+    }
+
+    .admin-table td .btn-confirm,
+    .admin-table td .btn-cancel {
+        flex: 1;
+        justify-content: center;
+        display: flex;
+        align-items: center;
+        gap: 0.4rem;
+        padding: 0.6rem 0.5rem;
+        border-radius: 8px;
+        font-size: 0.85rem;
+        font-weight: 600;
+    }
+
+    /* ── Stats row: 2 cols ── */
+    .booking-stats-row {
+        gap: 0.8rem;
+    }
+
+    .b-stat {
+        flex: 1 1 calc(50% - 0.4rem);
+        min-width: 0;
+        padding: 0.9rem 1rem;
+    }
+
+    /* ── Filters stack vertically ── */
+    .booking-filters {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .filter-select {
+        width: 100%;
+    }
+
+    /* ── General layout ── */
+    .admin-content {
+        padding: 1rem;
+    }
+
+    .rooms-tab-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.8rem;
+    }
+
+    .page-title {
+        font-size: 1.4rem;
+    }
+
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Modal Adjustments for Admin */
+.admin-body .modal-content {
+    background-color: white;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.admin-body .modal-header h2 {
+    color: var(--primary-dark);
+}
+
+.admin-body .form-grid {
+    margin-bottom: 1.5rem;
+}

@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Dawson Bungalow | Your Serene Escape in Kadugannawa</title>
+    <meta name="description"
+        content="Experience peace and tranquility at Dawson Bungalow, a premium guesthouse nested in the lush hills of Kadugannawa, Sri Lanka.">
+    <link rel="stylesheet" href="assets/css/styles.css">
+
+    <link rel="icon" type="image/svg+xml" href="assets/images/logo.svg">
+</head>
+
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar container">
+        <div class="nav-brand">
+            <a href="index.html">
+                <img src="assets/images/logo.svg" alt="Dawson Bungalow Logo" class="logo">
+                <h1>Dawson<span>Bungalow</span></h1>
+            </a>
+        </div>
+        <button class="mobile-menu-btn" aria-label="Toggle mobile menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        <ul class="nav-links">
+            <li><a href="index.html" class="active">Home</a></li>
+            <li><a href="rooms.html">Rooms</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="reviews.html">Reviews</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+        </ul>
+        <div class="nav-actions">
+            <a href="login.html" class="btn btn-outline">Log In</a>
+            <a href="register.html" class="btn btn-primary">Register</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-overlay"></div>
+        <div class="hero-slideshow">
+            <img src="assets/images/22.webp" alt="Slide 3" class="hero-slide">
+            <img src="assets/images/42375448.jpg" alt="Dawson Bungalow in Kadugannawa" class="hero-slide active">
+            <img src="assets/images/42375411.jpg" alt="Slide 2" class="hero-slide">
+            <img src="assets/images/42375443.jpg" alt="Slide 4" class="hero-slide">
+            <img src="assets/images/245590404.jpg" alt="Slide 5" class="hero-slide">
+            <img src="assets/images/42375478.jpg" alt="Slide 6" class="hero-slide">
+            <img src="assets/images/245596585.jpg" alt="Slide 7" class="hero-slide">
+        </div>
+        <button class="slider-arrow slider-prev" aria-label="Previous slide">
+            <i class='bx bx-chevron-left'></i>
+        </button>
+        <button class="slider-arrow slider-next" aria-label="Next slide">
+            <i class='bx bx-chevron-right'></i>
+        </button>
+        <div class="hero-content">
+            <h1>Escape to Serenity</h1>
+            <p>Discover the perfect blend of natural beauty and comfort in the scenic hills of Kadugannawa</p>
+            <a href="rooms.html" class="btn btn-primary">Explore Rooms</a>
+        </div>
+    </section>
+
+   <div class="booking-bar">
+  <div class="avail-search-wrap">
+
+    <div class="avail-field">
+      <label><i class='bx bx-calendar'></i> Check-in</label>
+      <input type="date" id="avail-checkin">
+    </div>
+
+    <div class="avail-field">
+      <label><i class='bx bx-calendar-check'></i> Check-out</label>
+      <input type="date" id="avail-checkout">
+    </div>
+
+    <div class="avail-field" style="max-width: 130px;">
+      <label><i class='bx bxs-user'></i> Guests</label>
+      <input type="number" id="avail-guests" min="1" max="10" value="1">
+    </div>
+
+    <div class="avail-field" style="justify-content: flex-end;">
+      <button id="avail-search-btn" class="btn btn-primary avail-btn">
+        <i class='bx bx-search'></i> Check Availability
+      </button>
+    </div>
+
+  </div>
+</div>
+
+<!-- Availability Results Section -->
+<section id="availability-section" style="display: none; padding: 3rem 0; background: var(--bg-light, #f9f9f9);">
+  <div class="container">
+    <div class="section-title">
+            <h2>Available Rooms</h2>
+            <p id="avail-summary" style="text-align: center; margin-bottom: 1.5rem; color: var(--text-light); font-size: 0.95rem;"></p>
+        </div>
+
+
+    <div id="avail-rooms-grid" style="
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 1.5rem;"></div>
+
+    <div style="text-align: center; margin-top: 2rem;">
+      <a id="avail-view-all-link" href="rooms.html" class="btn btn-outline">View All Rooms →</a>
+    </div>
+
+  </div>
+</section>
+
+
+
+    <!-- Featured Rooms -->
+    <section class="container" style="padding-bottom: 5rem;">
+        <div class="section-title">
+            <h2>Our Featured Rooms</h2>
+            <p>Experience comfort that seamlessly blends with the natural surroundings.</p>
+        </div>
+        <div class="grid-3">
+            <!-- Room 1 -->
+            <div class="room-card">
+                <div class="room-img">
+                    <img src="assets/images/245590476.jpg" alt="Mountain View Suite"
+                        style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+                <div class="room-info">
+                    <h3>Room 108 - Double Room</h3>
+                    <div class="room-features">
+                        <span>📶 Free WiFi</span>
+                        <span>❄️ Air Conditioning</span>
+                        <span>📺 Flat TV</span>
+                        <span>♨️ Hot Water</span>
+                        <span>🌅 Balcony View</span>
+                        <span>💼 Work Desk</span>
+                        <span>🚿 Private Bathroom</span>
+                    </div>
+                    <p style="color: var(--text-light); font-size: 0.95rem; margin-bottom: 1.5rem;">
+                        Wake up to the breathtaking views of the Kadugannawa pass. Perfect for couples seeking a
+                        romantic getaway.
+                    </p>
+                    <div class="room-price">
+                        <span>⭐ 4.8 <small style="font-size:0.8rem; color:var(--text-light); font-weight:normal;">guest
+                                rating</small></span>
+                        <a href="rooms.html" class="btn btn-outline" style="padding: 0.5rem 1rem;">View Details</a>
+                    </div>
+                </div>
+            </div>
+
+            
+
+            <!-- Room 2 -->
+            <div class="room-card">
+                <div class="room-img">
+                    <img src="assets/images/245590599.jpg" alt="Garden Standard Room"
+                        style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+                <div class="room-info">
+                    <h3>Room 107 - Double Room</h3>
+                    <div class="room-features">
+                        <span>📶 Free WiFi</span>
+                        <span>❄️ Air Conditioning</span>
+                        <span>📺 Flat TV</span>
+                        <span>♨️ Hot Water</span>
+                        <span>💼 Work Desk</span>
+                        <span>🚿 Private Bathroom</span>
+                    </div>
+                    <p style="color: var(--text-light); font-size: 0.95rem; margin-bottom: 1.5rem;">
+                        Cozy and comfortable with direct access to our lush, Perfect for couples seeking a romantic.
+                    </p>
+                    <div class="room-price">
+                        <span>⭐ 4.6 <small style="font-size:0.8rem; color:var(--text-light); font-weight:normal;">guest
+                                rating</small></span>
+                        <a href="rooms.html" class="btn btn-outline" style="padding: 0.5rem 1rem;">View Details</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Room 3 -->
+            <div class="room-card">
+                <div class="room-img">
+                    <img src="assets/images/245590677.jpg" alt="Family Retreat Room"
+                        style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+                <div class="room-info">
+                    <h3>Room 102 - Family Room</h3>
+                    <div class="room-features">
+                        <span>📶 Free WiFi</span>
+                        <span>❄️ Air Conditioning</span>
+                        <span>📺 Flat TV</span>
+                        <span>♨️ Hot Water</span>
+                        <span>🌅 Balcony View</span>
+                        <span>💼 Work Desk</span>
+                        <span>🚿 Private Bathroom</span>
+                    </div>
+                    <p style="color: var(--text-light); font-size: 0.95rem; margin-bottom: 1.5rem;">
+                        Wake up to comfort in our spacious Family Room, designed for relaxing stays and quality time together. Perfect for families seeking a cozy and peaceful getaway.
+                    </p>
+                    <div class="room-price">
+                        <span>⭐ 4.5 <small style="font-size:0.8rem; color:var(--text-light); font-weight:normal;">guest
+                                rating</small></span>
+                        <a href="rooms.html" class="btn btn-outline" style="padding: 0.5rem 1rem;">View Details</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Promotions Section -->
+    <section class="container" style="padding-bottom: 2rem; display: none;" id="promotions-section">
+        <div class="section-title">
+            <h2 style="color: var(--primary);">Special Offers <i class='bx bxs-offer' style="vertical-align: middle;"></i></h2>
+            <p>Take advantage of our current promotions.</p>
+        </div>
+        <div class="guesthouse-slideshow" id="promoSlideshow" style="margin-bottom: 2rem;">
+            <!-- Dynamically populated slides will be inserted here -->
+            
+            <!-- Caption overlay for the promotion text -->
+            <div class="gh-slide-overlay" id="promo-overlay" style="flex-direction: column; align-items: flex-start; justify-content: flex-end; padding: 2.5rem 2rem;">
+            </div>
+
+            <!-- Arrows -->
+            <button class="guesthouse-arrow guesthouse-prev" id="promo-prev" aria-label="Previous promotion">&#10094;</button>
+            <button class="guesthouse-arrow guesthouse-next" id="promo-next" aria-label="Next promotion">&#10095;</button>
+
+            <!-- Dot indicators -->
+            <div class="gh-dots" id="promo-dots">
+            </div>
+        </div>
+    </section>
+
+    <!-- Guesthouse Gallery -->
+    <section class="gh-gallery-section">
+        <div class="container">
+
+            <!-- Section Header -->
+            <div class="gh-header">
+                <h2>Explore Our Guesthouse</h2>
+                <p>Take a virtual tour of our place.</p>
+            </div>
+
+            <!-- Video Block -->
+            <div class="gh-video-wrapper">
+                <video
+                    src="assets/dwv.webm"
+                    controls
+                    autoplay
+                    muted
+                    loop
+                    playsinline
+                    aria-label="Dawson Bungalow virtual tour video"
+                    class="gh-video"
+                >
+                    Your browser does not support the video tag.
+                </video>
+                <div class="gh-video-glow"></div>
+            </div>
+
+            <!-- Divider -->
+            <div class="gh-divider">
+                <span>Photo Gallery</span>
+            </div>
+
+            <!-- Image Slideshow -->
+            <div class="guesthouse-slideshow" id="ghSlideshow">
+                <img src="assets/images/0 (46).webp"    class="guesthouse-slide"        alt="Guesthouse view 1">
+                <img src="assets/images/11111.webp"     class="guesthouse-slide active" alt="Guesthouse view 2">
+                <img src="assets/images/42375448.jpg"  class="guesthouse-slide"        alt="Guesthouse view 3">
+                <img src="assets/images/0 (56).webp"    class="guesthouse-slide"        alt="Guesthouse view 4">
+                <img src="assets/images/0 (18).webp"    class="guesthouse-slide"        alt="Guesthouse view 5">
+                <img src="assets/images/0 (54).webp"    class="guesthouse-slide"        alt="Guesthouse view 6">
+                <img src="assets/images/0 (48).webp"    class="guesthouse-slide"        alt="Guesthouse view 7">
+                <img src="assets/images/0 (1).webp"     class="guesthouse-slide"        alt="Guesthouse view 8">
+                <img src="assets/images/0 (5).webp"     class="guesthouse-slide"        alt="Guesthouse view 9">
+                <img src="assets/images/0 (2).webp"     class="guesthouse-slide"        alt="Guesthouse view 10">
+                <img src="assets/images/497459523.jpg" class="guesthouse-slide"        alt="Guesthouse view 11">
+                <img src="assets/images/0 (43).webp"    class="guesthouse-slide"        alt="Guesthouse view 12">
+                
+               
+
+                <!-- Gradient caption overlay -->
+                <div class="gh-slide-overlay">
+                    <span class="gh-slide-counter" id="ghCounter">1 / 12</span>
+                </div>
+
+                <!-- Arrows -->
+                <button class="guesthouse-arrow guesthouse-prev" aria-label="Previous image">&#10094;</button>
+                <button class="guesthouse-arrow guesthouse-next" aria-label="Next image">&#10095;</button>
+
+                <!-- Dot indicators -->
+                <div class="gh-dots" id="ghDots">
+                    <span class="gh-dot active"></span>
+                    <span class="gh-dot"></span>
+                    <span class="gh-dot"></span>
+                    <span class="gh-dot"></span>
+                    <span class="gh-dot"></span>
+                    <span class="gh-dot"></span>
+                    <span class="gh-dot"></span>
+                    <span class="gh-dot"></span>
+                    <span class="gh-dot"></span>
+                    <span class="gh-dot"></span>
+                    <span class="gh-dot"></span>
+                    <span class="gh-dot"></span>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- Popular Facilities -->
+    <section class="container" style="padding: 4rem 1.5rem 5rem;">
+        <div
+            style="background-color: var(--bg-white); padding: 1.5rem; border-radius: var(--radius); box-shadow: var(--shadow-sm);">
+            <div class="section-title" style="margin-bottom: 2rem;">
+                <h2>Most Popular Facilities</h2>
+            </div>
+            <div
+                style="display: flex; flex-wrap: wrap; justify-content: center; gap: 2.5rem; color: var(--text-main); font-weight: 500; font-size: 1.1rem;">
+                <div style="display: flex; align-items: center; gap: 0.5rem;"><span>🚭</span> Non-smoking rooms</div>
+                <div style="display: flex; align-items: center; gap: 0.5rem;"><span>❄️ </span> Air Conditioning</div>
+                <div style="display: flex; align-items: center; gap: 0.5rem;"><span>📶</span> Free WiFi</div>
+                <div style="display: flex; align-items: center; gap: 0.5rem;"><span>🅿️</span> Free parking</div>
+                <div style="display: flex; align-items: center; gap: 0.5rem;"><span>👨‍👩‍👧‍👦</span> Family rooms
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Rooms -->
+    <section class="container" style="padding-bottom: 5rem;">
+        <div class="section-title">
+            <h2>Places To Visit in Kadugannawa</h2>
+           
+        </div>
+        <div class="grid-3">
+            <!-- Room 1 -->
+            <div class="room-card">
+                <div class="room-img">
+                    <img src="assets/images/7623291662617834.jpg" alt="Mountain View Suite"
+                        style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+                <div class="room-info">
+                    <h3>Captain Dawson Tower</h3>
+                    
+                    <p style="color: var(--text-light); font-size: 0.95rem; margin-bottom: 1.5rem;">
+                        Dawson Tower is located next to the Colombo Kandy Road, the island's first modern freeway, close to Kadugannawa Pass. The Colombo-Kandy road began construction 
+                        in 1820 under the leadership of Captain William Francis Dawson, who died while working on the project. Dawson Tower was built in Dawson's memory.
+                    </p>
+                    
+                </div>
+            </div>
+
+            <!-- Room 2 -->
+            <div class="room-card">
+                <div class="room-img">
+                    <img src="assets/images/The-Lions-Mouth.webp" alt="Garden Standard Room"
+                        style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+                <div class="room-info">
+                    <h3>Lion's Mouth Rock Kadugannawa</h3>
+                    
+                    <p style="color: var(--text-light); font-size: 0.95rem; margin-bottom: 1.5rem;">
+                        Since it resembles a lion's face, the overhanging rock known as "Lion's Mouth" is located at a bend in the railway between Balana and Kadugannawa. 
+                        A tremendous plunge into the valley below can be seen when the train bends beneath the Lion's Mouth.
+                    </p>
+                    
+                </div>
+            </div>
+
+            <!-- Room 3 -->
+            <div class="room-card">
+                <div class="room-img">
+                    <img src="assets/images/123456.jpg" alt="Family Retreat Room"
+                        style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+                <div class="room-info">
+                    <h3>Railway Museum Kadugannawa</h3>
+                    
+                    <p style="color: var(--text-light); font-size: 0.95rem; margin-bottom: 1.5rem;">
+                        Sri Lanka Railways owns the railway museum, which opened on December 27, 2014, to mark the 150th anniversary of 
+                        railway service in Sri Lanka. Old engines, locomotives, rail cars, trolleys, carriages, and machinery can be found in the museum.
+                    </p>
+                 </div>
+            </div>
+
+
+            <!-- Room 2 -->
+            <div class="room-card">
+                <div class="room-img">
+                    <img src="assets/images/456123.webp" alt="Garden Standard Room"
+                        style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+                <div class="room-info">
+                    <h3>Balumgala</h3>
+                    
+                    <p style="color: var(--text-light); font-size: 0.95rem; margin-bottom: 1.5rem;">
+                        Balumgala is a view point and rock in Kadugannawa. From the Pahala Kadugannawa general viewing point, Balumgala, which is situated at the Kadugannawa Gap, 
+                        is well visible. Gorgeous views of the whole Kadugannawa valley can be seen from Balumgala Rock.
+                    </p>
+                    
+                </div>
+            </div>
+
+
+            <!-- Room 2 -->
+            <div class="room-card">
+                <div class="room-img">
+                    <img src="assets/images/unnamed.webp" alt="Garden Standard Room"
+                        style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+                <div class="room-info">
+                    <h3>Kadugannawa Rock View and Rest Area</h3>
+                    
+                    <p style="color: var(--text-light); font-size: 0.95rem; margin-bottom: 1.5rem;">
+                        The best spot to stop on the way from Colombo to Kandy. tranquil location. Wonderful vistas. There is parking available. There are a few tiny stores. 
+                        able to view monkeys and other natural animals. On the route to and from Kandy to Colombo, this is an unquestionably worthwhile stop.
+                    </p>
+                    
+                </div>
+            </div>
+
+
+            <!-- Room 2 -->
+            <div class="room-card">
+                <div class="room-img">
+                    <img src="assets/images/678094.webp" alt="Garden Standard Room"
+                        style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+                <div class="room-info">
+                    <h3>Balana Fort</h3>
+                    
+                    <p style="color: var(--text-light); font-size: 0.95rem; margin-bottom: 1.5rem;">
+                        Balana Fort is located in Sri Lanka, close to Kandy and Kadugannawa. The Kingdom of Kandy formed Balana, which translates 
+                        to "look out" in Sinhala, to defend the Kingdom against foreign troops. 
+                    </p>
+                    
+                </div>
+            </div>
+
+
+        </div>
+    </section>
+
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h3>Dawson Bungalow</h3>
+                    <p>Your peaceful escape in the hills of Sri Lanka. Experience genuine hospitality right next to
+                        nature.</p>
+                </div>
+                <div class="footer-col" style="padding-left: 2rem;">
+                    <h3>Quick Links</h3>
+                    <a href="index.html">Home</a>
+                    <a href="rooms.html">Rooms & Rates</a>
+                    <a href="about.html">About Us</a>
+                    <a href="reviews.html">Reviews</a>
+                    <a href="contact.html">Contact</a>
+                </div>
+                <div class="footer-col">
+                    <h3>Contact Info</h3>
+                    <p>📍 Kadugannawa, Sri Lanka</p>
+                    <p>📞 077 072 0230</p>
+                    <p>✉️ bookings@dawsonbungalow.com</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                &copy; 2026 Dawson Bungalow. All rights reserved. Built with ❤️ for your perfect stay.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button id="backToTop" class="back-to-top" aria-label="Back to top">
+        <i class='bx bx-chevron-up'></i>
+    </button>
+
+    <script src="assets/js/custom-alert.js"></script>
+    <script src="assets/js/main.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Profile | Dawson Bungalow</title>
+    <link rel="icon" type="image/svg+xml" href="assets/images/logo.svg">
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="assets/css/profile.css">
+    <style>
+        .error-msg {
+            display: none;
+            background: #fff0f0;
+            color: #c0392b;
+            border: 1px solid #f5c6c6;
+            border-radius: 8px;
+            padding: 0.75rem 1rem;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .success-msg {
+            display: none;
+            background: #f0fff4;
+            color: #276749;
+            border: 1px solid #c3e6cb;
+            border-radius: 8px;
+            padding: 0.75rem 1rem;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Edit form — hidden by default */
+        #edit-form-section {
+            display: none;
+            margin-top: 1.5rem;
+        }
+
+        #edit-form-section.open {
+            display: block;
+        }
+
+        /* Booking cards */
+        .booking-card {
+            border: 1px solid #e8e8e8;
+            border-radius: 12px;
+            padding: 1.25rem 1.5rem;
+            margin-bottom: 1rem;
+            background: #fafafa;
+        }
+
+        .booking-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 0.75rem;
+        }
+
+        .booking-room {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        .booking-type {
+            font-size: 0.8rem;
+            color: var(--text-light);
+            margin-top: 2px;
+        }
+
+        .booking-status {
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 3px 12px;
+            border-radius: 99px;
+            text-transform: capitalize;
+        }
+
+        .status-pending {
+            background: #fffbe6;
+            color: #b45309;
+        }
+
+        .status-confirmed {
+            background: #e8f5e9;
+            color: #276749;
+        }
+
+        .status-cancelled {
+            background: #f5f5f5;
+            color: #888;
+        }
+
+        .booking-meta {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            font-size: 0.85rem;
+            color: var(--text-light);
+            margin-bottom: 0.75rem;
+        }
+
+        .booking-meta span {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .booking-price {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .booking-actions {
+            margin-top: 0.75rem;
+        }
+
+        .btn-cancel-booking {
+            font-size: 0.82rem;
+            padding: 0.4rem 1rem;
+            background: #fff0f0;
+            color: #c0392b;
+            border: 1px solid #f5c6c6;
+            border-radius: 7px;
+            cursor: pointer;
+        }
+
+        .btn-cancel-booking:hover {
+            background: #ffe0e0;
+        }
+
+        .btn-cancel-booking:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .bookings-empty {
+            text-align: center;
+            color: var(--text-light);
+            padding: 3rem 0;
+        }
+
+        .tab-row {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+            margin-bottom: 1.5rem;
+        }
+
+        .tab-btn {
+            padding: 5px 14px;
+            border-radius: 99px;
+            border: 1px solid #e0e0e0;
+            background: #fff;
+            font-size: 0.82rem;
+            cursor: pointer;
+            color: var(--text-light);
+        }
+
+        .tab-btn.active {
+            background: #e8f5e9;
+            border-color: #a5d6a7;
+            color: var(--primary);
+            font-weight: 600;
+        }
+    </style>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar container">
+        <div class="nav-brand">
+            <a href="index.html">
+                <img src="assets/images/logo.svg" alt="Dawson Bungalow Logo" class="logo">
+                <h1>Dawson<span>Bungalow</span></h1>
+            </a>
+        </div>
+        <button class="mobile-menu-btn" aria-label="Toggle mobile menu">
+            <span></span><span></span><span></span>
+        </button>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="rooms.html">Rooms</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="reviews.html">Reviews</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+        </ul>
+        <div class="nav-actions">
+            <a href="profile.html" class="active" id="nav-profile-link"
+                style="font-weight:600; color:var(--primary);">My Profile</a>
+            <button id="logout-btn" class="btn btn-outline" style="padding: 0.5rem 1rem;">
+                Log Out
+            </button>
+        </div>
+    </nav>
+
+    <!-- Profile Header -->
+    <section class="profile-header">
+        <div class="container">
+            <div class="profile-title-area">
+                <div class="profile-avatar" id="profile-avatar">?</div>
+                <div class="profile-greeting">
+                    <h1 id="greeting-name">Welcome</h1>
+                    <p>Manage your account details and view your bookings</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <section class="container" style="padding-top: 3rem; padding-bottom: 6rem; display: flex; gap: 2rem; flex-wrap: wrap;">
+
+        <!-- Sidebar — Personal Details -->
+        <div class="profile-sidebar">
+            <div class="profile-card" style="border-radius:16px;overflow:hidden;padding:0;">
+
+                <!-- Card Header -->
+                <div style="background:linear-gradient(135deg,var(--primary,#214f36),#2d6a4f);
+                            padding:1.4rem 1.6rem 1.2rem;">
+                    <h2 style="color:#fff;font-size:1.15rem;font-weight:700;margin:0 0 2px;">Personal Details</h2>
+                    <p style="color:rgba(255,255,255,0.65);font-size:0.8rem;margin:0;">Your account information</p>
+                </div>
+
+                <!-- View mode -->
+                <div id="view-details" style="padding:1.4rem 1.6rem;">
+                    <div style="display:flex;flex-direction:column;gap:0;">
+
+                        <!-- Full Name -->
+                        <div style="display:flex;align-items:center;gap:0.9rem;padding:0.85rem 0;border-bottom:1px solid #f0f0f0;">
+                            <div style="width:36px;height:36px;border-radius:50%;background:#e8f5e9;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:1rem;">👤</div>
+                            <div style="min-width:0;">
+                                <p style="margin:0;font-size:0.72rem;color:#aaa;text-transform:uppercase;font-weight:600;letter-spacing:0.5px;">Full Name</p>
+                                <p id="profile-name" style="margin:2px 0 0;font-weight:600;color:#1a1a2e;font-size:0.95rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Loading...</p>
+                            </div>
+                        </div>
+
+                        <!-- Email -->
+                        <div style="display:flex;align-items:center;gap:0.9rem;padding:0.85rem 0;border-bottom:1px solid #f0f0f0;">
+                            <div style="width:36px;height:36px;border-radius:50%;background:#e3f2fd;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:1rem;">✉️</div>
+                            <div style="min-width:0;">
+                                <p style="margin:0;font-size:0.72rem;color:#aaa;text-transform:uppercase;font-weight:600;letter-spacing:0.5px;">Email Address</p>
+                                <p id="profile-email" style="margin:2px 0 0;font-weight:600;color:#1a1a2e;font-size:0.9rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Loading...</p>
+                            </div>
+                        </div>
+
+                        <!-- Phone -->
+                        <div style="display:flex;align-items:center;gap:0.9rem;padding:0.85rem 0;border-bottom:1px solid #f0f0f0;">
+                            <div style="width:36px;height:36px;border-radius:50%;background:#fff3e0;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:1rem;">📞</div>
+                            <div style="min-width:0;">
+                                <p style="margin:0;font-size:0.72rem;color:#aaa;text-transform:uppercase;font-weight:600;letter-spacing:0.5px;">Phone Number</p>
+                                <p id="profile-phone" style="margin:2px 0 0;font-weight:600;color:#1a1a2e;font-size:0.95rem;">—</p>
+                            </div>
+                        </div>
+
+                        <!-- Password -->
+                        <div style="display:flex;align-items:center;gap:0.9rem;padding:0.85rem 0;">
+                            <div style="width:36px;height:36px;border-radius:50%;background:#fce4ec;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:1rem;">🔒</div>
+                            <div>
+                                <p style="margin:0;font-size:0.72rem;color:#aaa;text-transform:uppercase;font-weight:600;letter-spacing:0.5px;">Password</p>
+                                <p style="margin:2px 0 2px;font-weight:600;color:#1a1a2e;letter-spacing:2px;">••••••••</p>
+                                <a href="reset-password.html" style="font-size:0.78rem;color:var(--primary,#214f36);font-weight:600;text-decoration:none;border-bottom:1px dashed var(--primary,#214f36);">Change Password</a>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <button id="edit-toggle-btn" class="btn btn-outline"
+                        style="width:100%;margin-top:1.2rem;border-radius:10px;font-weight:600;">
+                        ✏️ Edit Details
+                    </button>
+                </div>
+
+                <!-- Edit form (hidden until Edit is clicked) -->
+                <div id="edit-form-section" style="padding:1.4rem 1.6rem;">
+                    <div style="margin-bottom:1rem;">
+                        <p style="margin:0;font-size:1rem;font-weight:700;color:#1a1a2e;">Edit Your Details</p>
+                        <p style="margin:2px 0 0;font-size:0.8rem;color:#aaa;">Update your name or phone number below</p>
+                    </div>
+                    <div class="error-msg" id="edit-error"></div>
+                    <div class="success-msg" id="edit-success"></div>
+
+                    <div class="form-group">
+                        <label for="edit-name" style="font-size:0.8rem;font-weight:600;text-transform:uppercase;letter-spacing:0.4px;color:#555;">Full Name</label>
+                        <input type="text" id="edit-name" required pattern="^[A-Za-z\s'\\-]{2,100}$" maxlength="100"
+                            title="Full name should only contain letters, spaces, apostrophes, or hyphens."
+                            style="border-radius:10px;">
+                    </div>
+                    <div class="form-group">
+                        <label for="edit-phone" style="font-size:0.8rem;font-weight:600;text-transform:uppercase;letter-spacing:0.4px;color:#555;">Phone Number</label>
+                        <input type="tel" id="edit-phone" placeholder="+94771234567"
+                            pattern="^\+?[0-9\s\-()]{10,20}$" maxlength="20"
+                            title="Enter a valid phone number with exactly 10 digits, optional +, spaces, hyphens, or parentheses"
+                            style="border-radius:10px;">
+                    </div>
+                    <div style="display:flex;gap:0.75rem;margin-top:1rem;">
+                        <button id="save-btn" class="btn btn-primary" style="flex:1;border-radius:10px;font-weight:600;">Save Changes</button>
+                        <button id="cancel-edit-btn" class="btn btn-outline" style="flex:1;border-radius:10px;font-weight:600;">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main — Bookings -->
+        <div class="profile-main">
+            <div class="profile-card">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+                    <h2>My Bookings</h2>
+                    <a href="rooms.html" class="btn btn-primary" style="padding: 0.5rem 1rem;">Book a Room</a>
+                </div>
+
+                <!-- Status filter tabs -->
+                <div class="tab-row" id="tab-row">
+                    <button class="tab-btn active" data-status="all">All</button>
+                    <button class="tab-btn" data-status="pending">Pending</button>
+                    <button class="tab-btn" data-status="confirmed">Confirmed</button>
+                    <button class="tab-btn" data-status="cancelled">Cancelled</button>
+                </div>
+
+                <div id="user-bookings-container">
+                    <p style="text-align: center; color: var(--text-light); padding: 2rem 0;">
+                        Loading your bookings...
+                    </p>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h3>Dawson Bungalow</h3>
+                    <p>Your peaceful escape in the hills of Sri Lanka.</p>
+                </div>
+                <div class="footer-col" style="padding-left: 2rem;">
+                    <h3>Quick Links</h3>
+                    <a href="index.html">Home</a>
+                    <a href="rooms.html">Rooms & Rates</a>
+                    <a href="about.html">About Us</a>
+                    <a href="reviews.html">Reviews</a>
+                    <a href="contact.html">Contact</a>
+                </div>
+                <div class="footer-col">
+                    <h3>Contact Info</h3>
+                    <p>📍 Kadugannawa, Sri Lanka</p>
+                    <p>📞 +94 123 456 789</p>
+                    <p>✉️ bookings@dawsonbungalow.com</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                &copy; 2026 Dawson Bungalow. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script src="assets/js/custom-alert.js"></script>
+    <script src="assets/js/auth.js"></script>
+    <script src="assets/js/main.js"></script>
+    <script>
+        // Guard — must be logged in
+        requireLogin();
+
+        // ── State ──────────────────────────────────────────────────────────────
+        let allBookings = [];
+        let activeStatus = 'all';
+
+        // ── Load profile from API ──────────────────────────────────────────────
+        async function loadProfile() {
+            try {
+                const user = await apiFetch('/api/auth/profile');
+
+                // Update avatar and greeting
+                document.getElementById('profile-avatar').textContent =
+                    user.name ? user.name.charAt(0).toUpperCase() : '?';
+                document.getElementById('greeting-name').textContent =
+                    'Welcome, ' + user.name;
+
+                // Fill detail fields
+                document.getElementById('profile-name').textContent = user.name || '—';
+                document.getElementById('profile-email').textContent = user.email || '—';
+                document.getElementById('profile-phone').textContent = user.phone || '—';
+
+                // Pre-fill edit fields
+                document.getElementById('edit-name').value = user.name || '';
+                document.getElementById('edit-phone').value = user.phone || '';
+
+            } catch (err) {
+                console.error('Failed to load profile:', err.message);
+            }
+        }
+
+        // ── Load bookings from API ─────────────────────────────────────────────
+        async function loadBookings() {
+            const container = document.getElementById('user-bookings-container');
+            try {
+                allBookings = await apiFetch('/api/bookings/my');
+                console.log('📋 API /bookings/my response:', allBookings);
+                if (allBookings.length > 0) {
+                    console.log('First booking fields:', JSON.stringify(allBookings[0], null, 2));
+                }
+                renderBookings();
+            } catch (err) {
+                container.innerHTML = `
+                    <p style="text-align:center;color:#c0392b;padding:2rem 0;">
+                        Failed to load bookings. Please refresh.
+                    </p>`;
+            }
+        }
+
+        // ── Render bookings filtered by activeStatus ───────────────────────────
+        function renderBookings() {
+            const container = document.getElementById('user-bookings-container');
+            const filtered = activeStatus === 'all'
+                ? allBookings
+                : allBookings.filter(b => b.status === activeStatus);
+
+            if (filtered.length === 0) {
+                container.innerHTML = `
+                    <div class="bookings-empty">
+                        <p>${activeStatus === 'all'
+                        ? "You haven't made any bookings yet."
+                        : `No ${activeStatus} bookings found.`}</p>
+                        ${activeStatus === 'all'
+                        ? '<a href="rooms.html" class="btn btn-primary" style="margin-top:1rem;display:inline-block;">Browse Rooms</a>'
+                        : ''}
+                    </div>`;
+                return;
+            }
+
+            container.innerHTML = filtered.map(b => buildBookingCard(b)).join('');
+
+            // Attach cancel button listeners
+            container.querySelectorAll('.btn-cancel-booking').forEach(btn => {
+                btn.addEventListener('click', () => cancelBooking(btn.dataset.id));
+            });
+        }
+
+        // ── Build a single booking card HTML string ────────────────────────────
+        function buildBookingCard(b) {
+            const checkIn = new Date(b.checkInDate).toLocaleDateString('en-LK',
+                { day: 'numeric', month: 'short', year: 'numeric' });
+            const checkOut = new Date(b.checkOutDate).toLocaleDateString('en-LK',
+                { day: 'numeric', month: 'short', year: 'numeric' });
+
+            const statusColors = {
+                pending: { bg: '#fffbe6', color: '#b45309', dot: '#f59e0b' },
+                confirmed: { bg: '#e8f5e9', color: '#276749', dot: '#22c55e' },
+                cancelled: { bg: '#f5f5f5', color: '#888', dot: '#ccc' },
+            };
+            const sc = statusColors[b.status] || statusColors.pending;
+            const statusLabel = b.status.charAt(0).toUpperCase() + b.status.slice(1);
+
+            const cancelBtn = b.status === 'pending'
+                ? `<button class="btn-cancel-booking" data-id="${b.id}"
+                        style="font-size:0.8rem;padding:0.4rem 1.1rem;background:#fff0f0;color:#c0392b;
+                               border:1px solid #f5c6c6;border-radius:8px;cursor:pointer;font-weight:500;">
+                       Cancel Booking</button>`
+                : b.status === 'confirmed'
+                    ? `<p style="font-size:0.78rem;color:#aaa;margin:0;font-style:italic;">Contact us to cancel a confirmed booking.</p>`
+                    : '';
+
+            const requests = b.specialRequests
+                ? `<div style="background:#f9f9f9;border-radius:8px;padding:0.6rem 0.9rem;
+                               font-size:0.82rem;color:#666;border-left:3px solid #c3e6cb;">
+                       📝 ${b.specialRequests}
+                   </div>`
+                : '';
+
+            const promoBadge = b.promoCode
+                ? `<span style="display:inline-flex;align-items:center;gap:5px;
+                               background:linear-gradient(135deg,#e8f5e9,#d4edda);
+                               color:#276749;padding:4px 12px;border-radius:20px;
+                               font-size:0.75rem;font-weight:700;border:1px solid #a5d6a7;">
+                       🏷️ ${b.promoCode}
+                   </span>`
+                : '';
+
+            // Calculate nights from dates since API may not return totalNights
+            const nights = b.totalNights || Math.ceil(
+                (new Date(b.checkOutDate) - new Date(b.checkInDate)) / (1000 * 60 * 60 * 24)
+            ) || 0;
+
+            // Room info — use what the API provides with safe fallbacks
+            const roomLabel = b.roomNumber ? `Room ${b.roomNumber}` : (b.roomId || 'Your Room');
+            const roomType = b.roomType || '';
+
+            return `
+                <div id="booking-${b.id}" style="
+                    background:#fff;border:1px solid #eaeaea;border-radius:14px;
+                    margin-bottom:1.1rem;overflow:hidden;
+                    box-shadow:0 2px 10px rgba(0,0,0,0.05);
+                    transition:box-shadow 0.2s;
+                " onmouseenter="this.style.boxShadow='0 4px 20px rgba(0,0,0,0.1)'"
+                   onmouseleave="this.style.boxShadow='0 2px 10px rgba(0,0,0,0.05)'">
+
+                    <!-- Card Header -->
+                    <div style="display:flex;justify-content:space-between;align-items:center;
+                                padding:1rem 1.4rem;border-bottom:1px solid #f0f0f0;">
+                        <div>
+                            <p style="margin:0;font-weight:700;font-size:1rem;color:#1a1a2e;">${roomLabel}</p>
+                            <p style="margin:2px 0 0;font-size:0.8rem;color:#888;">${roomType}</p>
+                        </div>
+                        <span style="display:inline-flex;align-items:center;gap:6px;
+                                     background:${sc.bg};color:${sc.color};
+                                     padding:4px 12px;border-radius:20px;font-size:0.75rem;font-weight:700;">
+                            <span style="width:7px;height:7px;border-radius:50%;background:${sc.dot};display:inline-block;"></span>
+                            ${statusLabel}
+                        </span>
+                    </div>
+
+                    <!-- Date + Guests Strip -->
+                    <div style="display:flex;align-items:center;padding:1rem 1.4rem;background:#fafafa;gap:0.5rem;">
+                        <div style="text-align:center;flex:1;">
+                            <p style="margin:0;font-size:0.7rem;color:#aaa;text-transform:uppercase;font-weight:600;letter-spacing:0.5px;">Check-In</p>
+                            <p style="margin:4px 0 0;font-weight:700;font-size:0.9rem;color:#1a1a2e;">${checkIn}</p>
+                        </div>
+                        <div style="text-align:center;padding:0 0.5rem;">
+                            <div style="font-size:1rem;color:#ccc;">→</div>
+                            <div style="font-size:0.68rem;color:#aaa;">${nights}N</div>
+                        </div>
+                        <div style="text-align:center;flex:1;">
+                            <p style="margin:0;font-size:0.7rem;color:#aaa;text-transform:uppercase;font-weight:600;letter-spacing:0.5px;">Check-Out</p>
+                            <p style="margin:4px 0 0;font-weight:700;font-size:0.9rem;color:#1a1a2e;">${checkOut}</p>
+                        </div>
+                        <div style="width:1px;height:36px;background:#e5e5e5;margin:0 0.75rem;"></div>
+                        <div style="text-align:center;flex:0.8;">
+                            <p style="margin:0;font-size:0.7rem;color:#aaa;text-transform:uppercase;font-weight:600;letter-spacing:0.5px;">Guests</p>
+                            <p style="margin:4px 0 0;font-weight:700;font-size:0.9rem;color:#1a1a2e;">👥 ${b.guests}</p>
+                        </div>
+                    </div>
+
+                    <!-- Price + Promo + Actions -->
+                    <div style="display:flex;justify-content:space-between;align-items:center;
+                                flex-wrap:wrap;gap:0.75rem;padding:0.9rem 1.4rem;border-top:1px solid #f0f0f0;">
+                        <div style="display:flex;align-items:center;gap:0.7rem;flex-wrap:wrap;">
+                            <span style="font-size:1.15rem;font-weight:800;color:var(--primary);">LKR ${Number(b.totalPrice || 0).toLocaleString()}</span>
+                            ${promoBadge}
+                        </div>
+                        <div>${cancelBtn}</div>
+                    </div>
+
+                    ${requests ? `<div style="padding:0 1.4rem 1rem;">${requests}</div>` : ''}
+                </div>`;
+        }
+
+        // ── Cancel a booking ───────────────────────────────────────────────────
+        async function cancelBooking(bookingId) {
+            let confirmed = false;
+            if (typeof window.showCustomConfirm === 'function') {
+                confirmed = await window.showCustomConfirm("Cancel Booking", "Are you sure you want to cancel this booking?");
+            } else {
+                confirmed = confirm('Are you sure you want to cancel this booking?');
+            }
+
+            if (!confirmed) return;
+
+            const btn = document.querySelector(`.btn-cancel-booking[data-id="${bookingId}"]`);
+            if (btn) { btn.disabled = true; btn.textContent = 'Cancelling...'; }
+
+            try {
+                const updated = await apiFetch(`/api/bookings/my/${bookingId}/cancel`, {
+                    method: 'PATCH',
+                });
+
+                // Update local state and re-render
+                allBookings = allBookings.map(b => b.id === bookingId ? updated : b);
+                renderBookings();
+
+            } catch (err) {
+                if (typeof window.showCustomAlert === 'function') {
+                    await window.showCustomAlert('Error', err.message, 'error');
+                } else {
+                    alert(err.message);
+                }
+                if (btn) { btn.disabled = false; btn.textContent = 'Cancel Booking'; }
+            }
+        }
+
+        // ── Tab filter buttons ─────────────────────────────────────────────────
+        document.getElementById('tab-row').addEventListener('click', function (e) {
+            const btn = e.target.closest('.tab-btn');
+            if (!btn) return;
+
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            activeStatus = btn.dataset.status;
+            renderBookings();
+        });
+
+        // ── Edit profile toggle ────────────────────────────────────────────────
+        document.getElementById('edit-toggle-btn').addEventListener('click', function () {
+            document.getElementById('edit-form-section').classList.add('open');
+            document.getElementById('edit-toggle-btn').style.display = 'none';
+            hideError('edit-error');
+            hideError('edit-success');
+        });
+
+        document.getElementById('cancel-edit-btn').addEventListener('click', function () {
+            document.getElementById('edit-form-section').classList.remove('open');
+            document.getElementById('edit-toggle-btn').style.display = 'block';
+        });
+
+        const editNameInput = document.getElementById('edit-name');
+        const editPhoneInput = document.getElementById('edit-phone');
+
+        editNameInput?.addEventListener('input', function () {
+            this.value = this.value.replace(/[^A-Za-z\s'\-]/g, '');
+        });
+
+        editPhoneInput?.addEventListener('input', function () {
+            this.value = this.value.replace(/[^0-9+\s\-()]/g, '');
+        });
+
+        // ── Save profile ───────────────────────────────────────────────────────
+        document.getElementById('save-btn').addEventListener('click', async function () {
+            hideError('edit-error');
+            hideError('edit-success');
+
+            const name = editNameInput.value.trim();
+            const phone = editPhoneInput.value.trim();
+
+            // Validation
+            const nameRegex = /^[A-Za-z\s'\-]{2,100}$/;
+            if (!name || !nameRegex.test(name)) {
+                showError('edit-error', 'Please enter a valid full name with only letters, spaces, apostrophes, or hyphens.');
+                return;
+            }
+
+            if (phone) {
+                const phoneRegex = /^\+?[0-9\s\-()]{10,20}$/;
+                const digitsOnly = phone.replace(/[\s\-()]/g, "");
+                if (!phoneRegex.test(phone) || digitsOnly.length !== 10) {
+                    showError('edit-error', 'Please enter a valid phone number with exactly 10 digits.');
+                    return;
+                }
+            }
+
+            setLoading('save-btn', true, 'Saving...');
+
+            try {
+                const updated = await apiFetch('/api/auth/profile', {
+                    method: 'PUT',
+                    body: JSON.stringify({ name, phone }),
+                });
+
+                // Update displayed values
+                document.getElementById('profile-name').textContent = updated.name || '—';
+                document.getElementById('profile-phone').textContent = updated.phone || '—';
+                document.getElementById('profile-avatar').textContent =
+                    updated.name ? updated.name.charAt(0).toUpperCase() : '?';
+                document.getElementById('greeting-name').textContent =
+                    'Welcome, ' + updated.name;
+
+                // Update localStorage user object
+                const stored = getUser();
+                saveAuth(getToken(), { ...stored, name: updated.name });
+
+                showSuccess('edit-success', 'Profile updated successfully.');
+
+                setTimeout(() => {
+                    document.getElementById('edit-form-section').classList.remove('open');
+                    document.getElementById('edit-toggle-btn').style.display = 'block';
+                    hideError('edit-success');
+                }, 1500);
+
+            } catch (err) {
+                showError('edit-error', err.message);
+            } finally {
+                setLoading('save-btn', false);
+            }
+        });
+
+        // ── Logout ─────────────────────────────────────────────────────────────
+        document.getElementById('logout-btn').addEventListener('click', async function () {
+            clearAuth();
+            if (typeof window.showCustomAlert === 'function') {
+                await window.showCustomAlert("Logged Out", "You have successfully logged out.", "success");
+            }
+            window.location.href = 'index.html';
+        });
+
+        // ── Init ───────────────────────────────────────────────────────────────
+        loadProfile();
+        loadBookings();
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us | Dawson Bungalow</title>
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="icon" type="image/svg+xml" href="assets/images/logo.svg">
+    <style>
+        .page-header {
+            background-color: var(--primary-dark);
+            color: white;
+            padding: 5rem 0 3rem;
+            text-align: center;
+        }
+        .page-header h1 {
+            color: white;
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            padding: 4rem 0;
+        }
+        .contact-info {
+            background: var(--bg-white);
+            padding: 2.5rem;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-md);
+        }
+        .contact-item {
+            margin-bottom: 2rem;
+        }
+        .contact-item h4 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+        }
+        .contact-item p {
+            color: var(--text-light);
+        }
+        @media (max-width: 768px) {
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <!-- EmailJS SDK -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar container">
+        <div class="nav-brand">
+            <a href="index.html">
+                <img src="assets/images/logo.svg" alt="Dawson Bungalow Logo" class="logo">
+                <h1>Dawson<span>Bungalow</span></h1>
+            </a>
+        </div>
+        <button class="mobile-menu-btn" aria-label="Toggle mobile menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="rooms.html">Rooms</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="reviews.html">Reviews</a></li>
+            <li><a href="contact.html" class="active">Contact Us</a></li>
+        </ul>
+        <div class="nav-actions">
+            <a href="login.html" class="btn btn-outline">Log In</a>
+            <a href="register.html" class="btn btn-primary">Register</a>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <div class="page-header">
+        <div class="container">
+            <h1>Contact Us</h1>
+            <p>We're here to help you plan your perfect getaway.</p>
+        </div>
+    </div>
+
+    <!-- Contact Section -->
+    <section class="container">
+        <div class="contact-grid">
+            <!-- Contact Form -->
+            <div class="contact-form" style="background: var(--bg-white); padding: 2.5rem; border-radius: var(--radius); box-shadow: var(--shadow-md);">
+                <h2 style="text-align: left; font-size: 1.8rem; margin-bottom: 0.5rem;">Send a Message</h2>
+                <p style="text-align: left; margin-bottom: 2rem; color: var(--text-light);">Have an inquiry or specific requirement? Fill out the form below and we will get back to you shortly.</p>
+                <form id="contactForm">
+                    <div class="form-group">
+                        <label for="name">Your Name</label>
+                        <input type="text" id="name" placeholder="John Doe" required pattern="^[A-Za-z\s'\-]{2,100}$" maxlength="100" title="Name should only contain letters, spaces, apostrophes, or hyphens.">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" placeholder="john@example.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="subject">Subject</label>
+                        <input type="text" id="subject" placeholder="Booking Inquiry" maxlength="100">
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" rows="5" placeholder="How can we help you?" required minlength="10" maxlength="1000"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Send Message</button>
+                </form>
+            </div>
+
+            <!-- Contact Information -->
+            <div class="contact-info" style="height: 100%;">
+                <h2 style="font-size: 1.8rem; margin-bottom: 2rem;">Get in Touch</h2>
+                
+                <div class="contact-item">
+                    <h4>📍 Location</h4>
+                    <p>Dawson Bungalow<br>Kadugannawa Road,<br>Kadugannawa, Sri Lanka</p>
+                </div>
+                
+                <div class="contact-item">
+                    <h4>📞 Contact Numbers</h4>
+                    <p>Reception: 077 072 0230<br>Reservations: 077 072 0230</p>
+                </div>
+                
+                <div class="contact-item">
+                    <h4>✉️ Email Addresses</h4>
+                    <p>General Inquiries: Dawsonbungalow@outlook.com<br>Bookings: bookings@dawsonbungalow.com</p>
+                </div>
+
+                <div style="height: 200px; border-radius: 8px; margin-top: 2rem; overflow: hidden; box-shadow: var(--shadow-sm);">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15831.621946029192!2d80.5100085!3d7.2514578!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ae36b8c7938095f%3A0x7a4be5a3b3d5a65b!2sDawson%20Bungalow!5e0!3m2!1sen!2slk!4v1712209088656!5m2!1sen!2slk" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h3>Dawson Bungalow</h3>
+                    <p>Your peaceful escape in the hills of Sri Lanka. Experience genuine hospitality right next to nature.</p>
+                </div>
+                <div class="footer-col" style="padding-left: 2rem;">
+                    <h3>Quick Links</h3>
+                    <a href="index.html">Home</a>
+                    <a href="rooms.html">Rooms & Rates</a>
+                    <a href="about.html">About Us</a>
+                    <a href="reviews.html">Reviews</a>
+                    <a href="contact.html">Contact</a>
+                </div>
+                <div class="footer-col">
+                    <h3>Contact Info</h3>
+                    <p>📍 Kadugannawa, Sri Lanka</p>
+                    <p>📞 077 072 0230</p>
+                    <p>✉️ bookings@dawsonbungalow.com</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                &copy; 2026 Dawson Bungalow. All rights reserved. Built with ❤️ for your perfect stay.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button id="backToTop" class="back-to-top" aria-label="Back to top">
+        <i class='bx bx-chevron-up'></i>
+    </button>
+
+    <script src="assets/js/custom-alert.js"></script>
+    <script src="assets/js/main.js"></script>
+    <script>
+        // ─── EmailJS Configuration ───────────────────────────────────────────────
+        // Replace these three values with your actual EmailJS credentials:
+        //   1. Go to https://www.emailjs.com and sign up (free)
+        //   2. Add a Gmail service connected to gihanq1@gmail.com
+        //   3. Create an email template with variables:
+        //      {{from_name}}, {{from_email}}, {{subject}}, {{message}}
+        //   4. Paste your Public Key, Service ID, and Template ID below
+        const EMAILJS_PUBLIC_KEY  = '2c-dOYvKCfb4pyTKA';   // Public Key
+        const EMAILJS_SERVICE_ID  = 'service_g3arsbd';   // Service ID
+        const EMAILJS_TEMPLATE_ID = 'template_2q96z9q';  // Template ID
+        // ─────────────────────────────────────────────────────────────────────────
+
+        emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
+
+        const contactForm = document.getElementById('contactForm');
+        if (contactForm) {
+            const nameInput = document.getElementById('name');
+            const messageTextarea = document.getElementById('message');
+            const submitBtn = contactForm.querySelector('button[type="submit"]');
+
+            // Input sanitization for name
+            nameInput?.addEventListener('input', function () {
+                this.value = this.value.replace(/[^A-Za-z\s'\-]/g, '');
+            });
+
+            contactForm.addEventListener('submit', async function (e) {
+                e.preventDefault();
+
+                const name    = nameInput?.value.trim() || '';
+                const email   = document.getElementById('email')?.value.trim() || '';
+                const subject = document.getElementById('subject')?.value.trim() || 'General Inquiry';
+                const message = messageTextarea?.value.trim() || '';
+
+                // ── Validation ──────────────────────────────────────────────────
+                const nameRegex = /^[A-Za-z\s'\-]{2,100}$/;
+                if (!name || !nameRegex.test(name)) {
+                    if (typeof window.showCustomAlert === 'function') {
+                        await window.showCustomAlert("Validation Error", "Please enter a valid name with only letters, spaces, apostrophes, or hyphens.", "warning");
+                    } else {
+                        alert('Please enter a valid name.');
+                    }
+                    return;
+                }
+
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!email || !emailRegex.test(email)) {
+                    if (typeof window.showCustomAlert === 'function') {
+                        await window.showCustomAlert("Validation Error", "Please enter a valid email address.", "warning");
+                    } else {
+                        alert('Please enter a valid email.');
+                    }
+                    return;
+                }
+
+                if (!message || message.length < 10 || message.length > 1000) {
+                    if (typeof window.showCustomAlert === 'function') {
+                        await window.showCustomAlert("Validation Error", "Message must be between 10 and 1000 characters.", "warning");
+                    } else {
+                        alert('Message must be between 10 and 1000 characters.');
+                    }
+                    return;
+                }
+
+                // ── Send via EmailJS ─────────────────────────────────────────────
+                const originalText = submitBtn.textContent;
+                submitBtn.disabled = true;
+                submitBtn.textContent = 'Sending...';
+
+                try {
+                    await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
+                        from_name:  name,
+                        from_email: email,
+                        subject:    subject,
+                        message:    message,
+                        to_email:   'Dawsonbungalow@outlook.com'
+                    });
+
+                    if (typeof window.showCustomAlert === 'function') {
+                        await window.showCustomAlert("Message Sent!", "Thank you for reaching out, " + name + "! We will get back to you at " + email + " shortly.", "success");
+                    } else {
+                        alert('Message sent! We will contact you soon.');
+                    }
+                    contactForm.reset();
+
+                } catch (error) {
+                    console.error('EmailJS error:', error);
+                    if (typeof window.showCustomAlert === 'function') {
+                        await window.showCustomAlert("Send Failed", "Sorry, your message could not be sent. Please try emailing us directly at Dawsonbungalow@outlook.com", "error");
+                    } else {
+                        alert('Failed to send message. Please email us directly.');
+                    }
+                } finally {
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = originalText;
+                }
+            });
+        }
+    </script>

@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register | Dawson Bungalow</title>
+    <link rel="icon" type="image/svg+xml" href="assets/images/logo.svg">
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <style>
+        body { background-color: var(--bg-color); }
+
+        .error-msg {
+            display: none;
+            background: #fff0f0;
+            color: #c0392b;
+            border: 1px solid #f5c6c6;
+            border-radius: 8px;
+            padding: 0.75rem 1rem;
+            font-size: 0.9rem;
+            margin-bottom: 1.25rem;
+        }
+
+        .success-msg {
+            display: none;
+            background: #f0fff4;
+            color: #276749;
+            border: 1px solid #c3e6cb;
+            border-radius: 8px;
+            padding: 0.75rem 1rem;
+            font-size: 0.9rem;
+            margin-bottom: 1.25rem;
+        }
+    </style>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar container" style="border-bottom: none;">
+        <div class="nav-brand">
+            <a href="index.html">
+                <img src="assets/images/logo.svg" alt="Dawson Bungalow Logo" class="logo">
+                <h1>Dawson<span>Bungalow</span></h1>
+            </a>
+        </div>
+        <div class="nav-actions auth-actions">
+            <a href="index.html" class="btn btn-outline" style="padding: 0.5rem 1.2rem;">Back to Home</a>
+        </div>
+    </nav>
+
+    <!-- Register Form -->
+    <div class="auth-wrapper">
+        <div class="auth-container">
+            <h2>Create an Account</h2>
+            <p>Join us to make bookings easier and get exclusive offers.</p>
+
+            <!-- Error / success banners -->
+            <div class="error-msg"   id="error-msg"></div>
+            <div class="success-msg" id="success-msg"></div>
+
+            <form id="register-form">
+                <div class="form-group">
+                    <label for="name">Full Name</label>
+                    <input type="text" id="name" placeholder="John Doe" required pattern="^[A-Za-z\s'\-]{2,100}$" maxlength="100" title="Full name should only contain letters, spaces, apostrophes, or hyphens.">
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" placeholder="you@example.com" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone" placeholder="+94771234567" required inputmode="tel" pattern="^\+?[0-9\s\-()]{10,20}$" maxlength="20" title="Enter a valid phone number with exactly 10 digits, optional +, spaces, hyphens, or parentheses">
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" placeholder="At least 8 characters" required minlength="8">
+                </div>
+
+                <div class="form-group" style="margin-bottom: 2rem;">
+                    <label for="confirm-password">Confirm Password</label>
+                    <input type="password" id="confirm-password" placeholder="Repeat your password" required minlength="8">
+                </div>
+
+                <button type="submit" id="submit-btn" class="btn btn-primary" style="width: 100%;">
+                    Create Account
+                </button>
+            </form>
+
+            <div class="auth-footer">
+                Already have an account? <a href="login.html">Log In</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="assets/js/auth.js"></script>
+    <script>
+        // Redirect away if already logged in
+        redirectIfLoggedIn();
+
+        const nameInput = document.getElementById('name');
+        const phoneInput = document.getElementById('phone');
+
+        nameInput?.addEventListener('input', function () {
+            this.value = this.value.replace(/[^A-Za-z\s'\-]/g, '');
+        });
+
+        phoneInput?.addEventListener('input', function () {
+            this.value = this.value.replace(/[^0-9+\s\-()]/g, '');
+        });
+
+        document.getElementById('register-form').addEventListener('submit', async function (e) {
+            e.preventDefault();
+
+            hideError('error-msg');
+            hideError('success-msg');
+
+            const name            = nameInput.value.trim();
+            const email           = document.getElementById('email').value.trim();
+            const phone           = phoneInput.value.trim();
+            const password        = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirm-password').value;
+
+            // Client-side validation
+            const nameRegex = /^[A-Za-z\s'\-]{2,100}$/;
+            if (!name || !nameRegex.test(name)) {
+                showError('error-msg', 'Please enter a valid full name with only letters, spaces, apostrophes, or hyphens.');
+                return;
+            }
+
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!email || !emailRegex.test(email)) {
+                showError('error-msg', 'Please enter a valid email address.');
+                return;
+            }
+
+            const phoneRegex = /^\+?[0-9\s\-()]{10,20}$/;
+            const digitsOnly = phone.replace(/[\s\-()]/g, "");
+            if (!phone || !phoneRegex.test(phone) || digitsOnly.length !== 10) {
+                showError('error-msg', 'Please enter a valid phone number with exactly 10 digits.');
+                return;
+            }
+
+            if (!password) {
+                showError('error-msg', 'Please enter a password.');
+                return;
+            }
+
+            if (password !== confirmPassword) {
+                showError('error-msg', 'Passwords do not match.');
+                return;
+            }
+
+            if (password.length < 8) {
+                showError('error-msg', 'Password must be at least 8 characters.');
+                return;
+            }
+
+            setLoading('submit-btn', true, 'Creating account...');
+
+            try {
+                const data = await apiFetch('/api/auth/register', {
+                    method: 'POST',
+                    body: JSON.stringify({ name, email, password, phone }),
+                });
+
+                // Save token and user to localStorage
+                saveAuth(data.token, {
+                    id:    data.id,
+                    name:  data.name,
+                    email: data.email,
+                    role:  data.role,
+                });
+
+                showSuccess('success-msg', 'Account created! Redirecting...');
+
+                // Redirect to profile after short delay
+                setTimeout(() => {
+                    window.location.href = 'profile.html';
+                }, 1200);
+
+            } catch (err) {
+                showError('error-msg', err.message);
+                setLoading('submit-btn', false);
+            }
+        });
+    </script>
+</body>
+</html>

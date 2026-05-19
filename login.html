@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | Dawson Bungalow</title>
+    <link rel="icon" type="image/svg+xml" href="assets/images/logo.svg">
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <style>
+        body {
+            background-color: var(--bg-color);
+        }
+
+        .error-msg {
+            display: none;
+            background: #fff0f0;
+            color: #c0392b;
+            border: 1px solid #f5c6c6;
+            border-radius: 8px;
+            padding: 0.75rem 1rem;
+            font-size: 0.9rem;
+            margin-bottom: 1.25rem;
+        }
+    </style>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar container" style="border-bottom: none;">
+        <div class="nav-brand">
+            <a href="index.html">
+                <img src="assets/images/logo.svg" alt="Dawson Bungalow Logo" class="logo">
+                <h1>Dawson<span>Bungalow</span></h1>
+            </a>
+        </div>
+        <div class="nav-actions auth-actions">
+            <a href="index.html" class="btn btn-outline" style="padding: 0.5rem 1.2rem;">Back to Home</a>
+        </div>
+    </nav>
+
+    <!-- Login Form -->
+    <div class="auth-wrapper">
+        <div class="auth-container">
+            <h2>Welcome Back</h2>
+            <p>Log in to manage your bookings and profile.</p>
+
+            <!-- Error banner -->
+            <div class="error-msg" id="error-msg"></div>
+
+            <form id="login-form">
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" placeholder="you@example.com" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" placeholder="••••••••" required>
+                </div>
+
+                <div
+                    style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; font-size: 0.9rem;">
+                    <label style="display: flex; align-items: center; gap: 0.5rem; font-weight: normal;">
+                        <input type="checkbox" id="remember-me"> Remember me
+                    </label>
+                    <a href="reset-password.html" style="color: var(--primary); font-weight: 500;">Forgot Password?</a>
+                </div>
+
+                <button type="submit" id="submit-btn" class="btn btn-primary" style="width: 100%;">
+                    Log In
+                </button>
+            </form>
+
+            <div class="auth-footer">
+                Don't have an account? <a href="register.html">Sign Up</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="assets/js/custom-alert.js"></script>
+    <script src="assets/js/auth.js"></script>
+    <script>
+        // Redirect away if already logged in
+        redirectIfLoggedIn();
+
+        document.getElementById('login-form').addEventListener('submit', async function (e) {
+            e.preventDefault();
+
+            hideError('error-msg');
+
+            const email = document.getElementById('email').value.trim();
+            const password = document.getElementById('password').value;
+
+            setLoading('submit-btn', true, 'Logging in...');
+
+            try {
+                const data = await apiFetch('/api/auth/login', {
+                    method: 'POST',
+                    body: JSON.stringify({ email, password }),
+                });
+
+                // Save token and user info
+                saveAuth(data.token, {
+                    id: data.id,
+                    name: data.name,
+                    email: data.email,
+                    role: data.role,
+                });
+
+                if (typeof window.showCustomAlert === 'function') {
+                    await window.showCustomAlert("Login Successful", "Welcome back, " + data.name + "!", "success");
+                }
+
+                // Redirect — admins go to admin dashboard, customers to profile
+                if (data.role === 'admin') {
+                    window.location.href = 'admin.html';
+                } else {
+                    window.location.href = 'profile.html';
+                }
+
+            } catch (err) {
+                showError('error-msg', err.message);
+                setLoading('submit-btn', false);
+            }
+        });
+    </script>
+</body>
+
+</html>
