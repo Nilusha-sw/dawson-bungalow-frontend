@@ -183,14 +183,14 @@ ul {
 }
 
 .nav-brand img {
-  width: 42px;
-  height: 42px;
+  width: 36px;
+  height: 36px;
   display: block;
   object-fit: contain;
 }
 
 .nav-brand h1 {
-  font-size: 1.6rem;
+  font-size: 1.3rem;
   letter-spacing: -0.6px;
   margin: 0;
   line-height: 1;

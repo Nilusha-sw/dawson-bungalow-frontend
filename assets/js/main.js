@@ -77,7 +77,7 @@ document.addEventListener('DOMContentLoaded', () => {
             mobileHeader = document.createElement('div');
             mobileHeader.className = 'mobile-sidebar-header';
             mobileHeader.innerHTML = `
-                <h2>Kandy<span>DawsonBungalow</span></h2>
+                <h2>Dawson<span>Bungalow</span></h2>
                 <button class="mobile-close-btn"><i class='bx bx-x'></i></button>
             `;
             navLinksContainer.insertBefore(mobileHeader, navLinksContainer.firstChild);
