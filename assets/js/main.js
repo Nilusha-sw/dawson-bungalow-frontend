@@ -77,7 +77,7 @@ document.addEventListener('DOMContentLoaded', () => {
             mobileHeader = document.createElement('div');
             mobileHeader.className = 'mobile-sidebar-header';
             mobileHeader.innerHTML = `
-                <h2>Dawson<span>Bungalow</span></h2>
+                <h2>Kandy<span>DawsonBungalow</span></h2>
                 <button class="mobile-close-btn"><i class='bx bx-x'></i></button>
             `;
             navLinksContainer.insertBefore(mobileHeader, navLinksContainer.firstChild);
@@ -635,27 +635,90 @@ if (availSearchBtn) {
         if (!overlay) return;
 
         overlay.innerHTML = `
-            <div style="background: rgba(33, 79, 54, 0.9); padding: 5px 12px; border-radius: 20px; color: white; font-weight: bold; font-size: 0.9rem; margin-bottom: 15px; display: inline-block;">
-                ${promo.discountPercentage}% OFF
-            </div>
-            <h3 style="color: white; font-size: 2rem; margin-bottom: 10px; ">${promo.title}</h3>
-            <p style="color: rgba(255, 255, 255, 1); margin-bottom: 20px; font-size: 1.05rem; max-width: 600px; background: rgba(0,0,0,0.3); padding: 8px 15px; border-radius: 8px; backdrop-filter: blur(5px);">${promo.description}</p>
-            <div style="display: flex; gap: 20px; align-items: center; flex-wrap: wrap;">
-                
-               <div style="background: rgba(33, 79, 54, 0.9); padding: 5px 12px; border-radius: 20px; color: white; font-weight: bold; font-size: 0.9rem; margin-bottom: 15px; display: inline-block;">
-                    
-                    <span style="font-size: 0.9rem; color: rgba(255,255,255,0.8); text-transform: uppercase;">code: </span>
-                    <strong style="color: white; font-size: 1.0rem; letter-spacing: 1px; margin-left: 8px;">${promo.promoCode}</strong>
-                </div> 
-               
-              
-               
-                <span style="background: rgba(33, 79, 54, 0.9); padding: 5px 12px; border-radius: 20px; color: white; font-weight: bold; font-size: 0.97rem; margin-bottom: 15px; display: inline-block;">
-                    Valid until: ${new Date(promo.expiryDate).toLocaleDateString()}
-                </span>
-            
-            </div>
-        `;
+    <div style="
+        background: rgba(33, 79, 54, 0.9);
+        padding: 4px 10px;
+        border-radius: 16px;
+        color: white;
+        font-weight: bold;
+        font-size: 0.75rem;
+        margin-bottom: 10px;
+        display: inline-block;
+    ">
+        ${promo.discountPercentage}% OFF
+    </div>
+
+    <h3 style="
+        color: white;
+        font-size: clamp(1.2rem, 4vw, 1.8rem);
+        margin-bottom: 8px;
+        line-height: 1.3;
+    ">
+        ${promo.title}
+    </h3>
+
+    <p style="
+        color: white;
+        margin-bottom: 12px;
+        font-size: clamp(0.82rem, 2.8vw, 1rem);
+        max-width: 100%;
+        background: rgba(0,0,0,0.3);
+        padding: 8px 12px;
+        border-radius: 8px;
+        backdrop-filter: blur(5px);
+        line-height: 1.5;
+    ">
+        ${promo.description}
+    </p>
+
+    <div style="
+        display: flex;
+        gap: 10px;
+        align-items: flex-start;
+        flex-wrap: wrap;
+    ">
+
+        <div style="
+            background: rgba(33, 79, 54, 0.9);
+            padding: 4px 10px;
+            border-radius: 16px;
+            color: white;
+            font-weight: bold;
+            font-size: 0.75rem;
+            display: inline-block;
+        ">
+            <span style="
+                font-size: 0.7rem;
+                color: rgba(255,255,255,0.8);
+                text-transform: uppercase;
+            ">
+                code:
+            </span>
+
+            <strong style="
+                color: white;
+                font-size: 0.8rem;
+                letter-spacing: 1px;
+                margin-left: 5px;
+            ">
+                ${promo.promoCode}
+            </strong>
+        </div>
+
+        <span style="
+            background: rgba(33, 79, 54, 0.9);
+            padding: 4px 10px;
+            border-radius: 16px;
+            color: white;
+            font-weight: bold;
+            font-size: 0.75rem;
+            display: inline-block;
+        ">
+            Valid until: ${new Date(promo.expiryDate).toLocaleDateString()}
+        </span>
+
+    </div>
+`;
     }
 
     function initPromoSlider() {

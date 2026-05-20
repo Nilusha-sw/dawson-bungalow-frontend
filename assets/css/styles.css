@@ -190,10 +190,12 @@ ul {
 }
 
 .nav-brand h1 {
-  font-size: 1.8rem;
-  letter-spacing: -0.5px;
+  font-size: 1.6rem;
+  letter-spacing: -0.6px;
   margin: 0;
   line-height: 1;
+  font-weight: 700;
+  white-space: nowrap;
 }
 
 .nav-brand span {
@@ -202,8 +204,39 @@ ul {
 
 .nav-links {
   display: flex;
-  gap: 2rem;
+  gap: 1.5rem;
   align-items: center;
+}
+
+/* Medium screen adjustments for desktop to prevent navbar wrapping */
+@media (min-width: 1025px) and (max-width: 1200px) {
+  .navbar {
+    padding: 1.2rem 0;
+  }
+  .nav-brand h1 {
+    font-size: 1.35rem;
+    letter-spacing: -0.4px;
+  }
+  .nav-brand img {
+    width: 36px;
+    height: 36px;
+  }
+  .nav-brand a {
+    gap: 0.5rem;
+  }
+  .nav-links {
+    gap: 1rem;
+  }
+  .nav-links li a {
+    font-size: 0.95rem;
+  }
+  .nav-actions {
+    gap: 0.75rem;
+  }
+  .btn {
+    padding: 0.7rem 1.3rem;
+    font-size: 0.9rem;
+  }
 }
 
 .nav-links li a {
@@ -980,7 +1013,7 @@ footer {
 
 /* Responsive */
 /* Responsive Navigation (Mobile Sidebar) */
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
   .navbar {
     padding: 1rem 1.5rem;
   }
