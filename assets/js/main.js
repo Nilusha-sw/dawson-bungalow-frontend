@@ -2,7 +2,7 @@
 
 document.addEventListener('DOMContentLoaded', () => {
 
-    const API_BASE = "https://dawson-bungalow-api-latest.onrender.com";
+    const API_BASE = "https://dawsonbunglow-production-1022.up.railway.app";
 
     // ---------------------------
     // NAVBAR ACTIVE STATE

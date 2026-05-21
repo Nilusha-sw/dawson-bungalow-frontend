@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     // API Configuration
-    const API_BASE_URL = 'https://dawson-bungalow-api-latest.onrender.com/api/reviews'; 
+    const API_BASE_URL = 'https://dawsonbunglow-production-1022.up.railway.app/api/reviews'; 
 
     let reviews = [];
     let isLoading = false;
