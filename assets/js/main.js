@@ -4,6 +4,30 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const API_BASE = "https://dawsonbunglow-production-1022.up.railway.app";
 
+    // Helper to get local date in YYYY-MM-DD format
+    const getLocalTodayString = () => {
+        const d = new Date();
+        const year = d.getFullYear();
+        const month = String(d.getMonth() + 1).padStart(2, '0');
+        const day = String(d.getDate()).padStart(2, '0');
+        return `${year}-${month}-${day}`;
+    };
+
+    // Helper to get the next day in YYYY-MM-DD format in a robust, local-timezone safe manner
+    const getNextDayString = (dateStr) => {
+        if (!dateStr) return '';
+        const parts = dateStr.split('-');
+        const year = parseInt(parts[0], 10);
+        const month = parseInt(parts[1], 10) - 1;
+        const day = parseInt(parts[2], 10);
+        const d = new Date(year, month, day);
+        d.setDate(d.getDate() + 1);
+        const nextYear = d.getFullYear();
+        const nextMonth = String(d.getMonth() + 1).padStart(2, '0');
+        const nextDay = String(d.getDate()).padStart(2, '0');
+        return `${nextYear}-${nextMonth}-${nextDay}`;
+    };
+
     // ---------------------------
     // NAVBAR ACTIVE STATE
     // ---------------------------
@@ -278,20 +302,23 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // ---------------------------
 // CHECK AVAILABILITY (INDEX PAGE)
-// ---------------------------
 const availSearchBtn = document.getElementById("avail-search-btn");
 if (availSearchBtn) {
 
-    // Set today as min date for check-in
-    const today = new Date().toISOString().split("T")[0];
-    document.getElementById("avail-checkin").min = today;
-    document.getElementById("avail-checkout").min = today;
+    // Set today as min date for check-in and check-out in local timezone
+    const localToday = getLocalTodayString();
+    document.getElementById("avail-checkin").min = localToday;
+    document.getElementById("avail-checkout").min = localToday;
 
-    // Auto-update checkout min when checkin changes
+    // Auto-update checkout min when checkin changes to the next day
     document.getElementById("avail-checkin").addEventListener("change", function () {
-        document.getElementById("avail-checkout").min = this.value;
-        if (document.getElementById("avail-checkout").value <= this.value) {
-            document.getElementById("avail-checkout").value = "";
+        if (this.value) {
+            document.getElementById("avail-checkout").min = getNextDayString(this.value);
+            if (document.getElementById("avail-checkout").value && document.getElementById("avail-checkout").value <= this.value) {
+                document.getElementById("avail-checkout").value = "";
+            }
+        } else {
+            document.getElementById("avail-checkout").min = getLocalTodayString();
         }
     });
 
@@ -303,6 +330,10 @@ if (availSearchBtn) {
         // Validate
         if (!checkIn || !checkOut) {
             await window.showCustomAlert("Search Failed", "Please select both check-in and check-out dates.",  "error");
+            return;
+        }
+        if (checkIn < getLocalTodayString()) {
+            await window.showCustomAlert("Search Failed", "Check-in date cannot be in the past.", "error");
             return;
         }
         if (checkIn >= checkOut) {
@@ -542,8 +573,97 @@ if (availSearchBtn) {
     loadRooms();
 
     // ---------------------------
+    // PROMOTIONS TOAST NOTIFICATIONS
+    // ---------------------------
+    function showPromoToast(message) {
+        let container = document.querySelector(".promo-toast-container");
+        if (!container) {
+            container = document.createElement("div");
+            container.className = "promo-toast-container";
+            document.body.appendChild(container);
+        }
+
+        const toast = document.createElement("div");
+        toast.className = "promo-toast";
+        toast.innerHTML = `
+            <i class='bx bxs-check-circle'></i>
+            <span>${message}</span>
+        `;
+        container.appendChild(toast);
+
+        // Auto remove after 3.5s
+        setTimeout(() => {
+            toast.style.transform = "translateY(30px) scale(0.9)";
+            toast.style.opacity = "0";
+            setTimeout(() => {
+                toast.remove();
+                if (container.children.length === 0) {
+                    container.remove();
+                }
+            }, 400);
+        }, 3600);
+    }
+
+    // Global helper to copy coupon codes with premium micro-interaction
+    window.copyPromoCode = async function(code, element) {
+        try {
+            await navigator.clipboard.writeText(code);
+            
+            // Visual feedback inside the badge
+            const tooltip = element.querySelector('.copy-tooltip');
+            if (tooltip) {
+                const originalText = tooltip.innerHTML;
+                tooltip.innerHTML = "Copied! <i class='bx bx-check'></i>";
+                tooltip.classList.add('copied');
+                element.classList.add('copied');
+                
+                setTimeout(() => {
+                    tooltip.innerHTML = originalText;
+                    tooltip.classList.remove('copied');
+                    element.classList.remove('copied');
+                }, 2000);
+            }
+            
+            showPromoToast(`Promo code <strong>${code}</strong> copied to clipboard!`);
+        } catch (err) {
+            console.error("Failed to copy promo code:", err);
+        }
+    };
+
+    // ---------------------------
     // LOAD ACTIVE PROMOTIONS
     // ---------------------------
+    function showFallbackRibbon(ribbon, ribbonContent) {
+        if (ribbon && ribbonContent) {
+            ribbon.classList.add('active');
+            ribbonContent.innerHTML = `
+                <div class="promo-badge">
+                    <span class="live-dot-pulse"></span>
+                    <span>Offer</span>
+                </div>
+                <span class="promo-description">
+                    🎉 <strong>Special Opening Offer</strong> - Get <strong>10% OFF</strong> on all room bookings! Use code
+                </span>
+                <div class="promo-code-wrapper" title="Click to copy promo code" onclick="window.copyPromoCode('WELCOME10', this)">
+                    <span>WELCOME10</span>
+                    <span class="copy-tooltip">Copy Code <i class='bx bx-copy-alt'></i></span>
+                </div>
+                <span class="promo-divider">|</span>
+                <span class="promo-secondary-text">🏞️ Escape to serenity in the scenic Kadugannawa hills</span>
+                <span class="promo-divider">|</span>
+                <span class="promo-phone"><i class='bx bxs-phone'></i> 077 072 0230</span>
+            `;
+            
+            document.getElementById("close-promotions-ribbon")?.addEventListener("click", () => {
+                ribbon.style.transform = "translateY(-100%)";
+                ribbon.style.opacity = "0";
+                setTimeout(() => {
+                    ribbon.classList.remove('active');
+                }, 600);
+            });
+        }
+    }
+
     async function loadActivePromotions() {
         const section = document.getElementById("promotions-section");
         const slideshow = document.getElementById("promoSlideshow");
@@ -561,8 +681,10 @@ if (availSearchBtn) {
             const promotions = await res.json();
 
             if (!promotions || promotions.length === 0) {
+                if (ribbon) {
+                    ribbon.classList.remove('active');
+                }
                 if (section) section.style.display = 'none';
-                if (ribbon) ribbon.style.display = 'none';
                 return;
             }
 
@@ -605,22 +727,42 @@ if (availSearchBtn) {
                 initPromoSlider();
             }
 
-            // --- Handle Ribbon (rooms.html) ---
+            // --- Handle Ribbon (rooms.html & index.html) ---
             if (ribbon && ribbonContent) {
-                ribbon.style.display = 'block';
+                ribbon.classList.add('active');
                 // Show the first active promotion on the ribbon
                 const topPromo = promotions[0];
-                ribbonContent.innerHTML = `🎉 <strong>${topPromo.title}</strong> - ${topPromo.discountPercentage}% OFF! Use code <strong style="background: rgba(255,255,255,0.2); padding: 2px 6px; border-radius: 4px; letter-spacing: 1px;">${topPromo.promoCode}</strong> Valid until ${new Date(topPromo.expiryDate).toLocaleDateString()}`;
+                ribbonContent.innerHTML = `
+                    <div class="promo-badge">
+                        <span class="live-dot-pulse"></span>
+                        <span>Active Offer</span>
+                    </div>
+                    <span class="promo-description">
+                        🎉 <strong>${topPromo.title}</strong> - Get <strong>${topPromo.discountPercentage}% OFF</strong>! Use code
+                    </span>
+                    <div class="promo-code-wrapper" title="Click to copy promo code" onclick="window.copyPromoCode('${topPromo.promoCode}', this)">
+                        <span>${topPromo.promoCode}</span>
+                        <span class="copy-tooltip">Copy Code <i class='bx bx-copy-alt'></i></span>
+                    </div>
+                    <span class="promo-divider">|</span>
+                    <span class="promo-secondary-text">Valid until ${new Date(topPromo.expiryDate).toLocaleDateString()}</span>
+                `;
 
                 document.getElementById("close-promotions-ribbon")?.addEventListener("click", () => {
-                    ribbon.style.display = 'none';
+                    ribbon.style.transform = "translateY(-100%)";
+                    ribbon.style.opacity = "0";
+                    setTimeout(() => {
+                        ribbon.classList.remove('active');
+                    }, 600);
                 });
             }
 
         } catch (err) {
             console.error("Promotions loading error:", err);
+            if (ribbon) {
+                ribbon.classList.remove('active');
+            }
             if (section) section.style.display = 'none';
-            if (ribbon) ribbon.style.display = 'none';
         }
     }
 
@@ -822,24 +964,24 @@ if (availSearchBtn) {
     const bookingModal = document.getElementById('bookingModal');
     const bookingForm = document.getElementById('bookingForm');
 
-    // Set min date for check-in to today
-    const today = new Date().toISOString().split('T')[0];
+    // Set min date for check-in and check-out to local today
+    const localTodayVal = getLocalTodayString();
     const checkInInput = document.getElementById('checkInDate');
     const checkOutInput = document.getElementById('checkOutDate');
 
-    if (checkInInput) checkInInput.min = today;
+    if (checkInInput) checkInInput.min = localTodayVal;
+    if (checkOutInput) checkOutInput.min = localTodayVal;
 
-    // Update check-out min when check-in changes
+    // Update check-out min when check-in changes to the next day
     checkInInput?.addEventListener('change', () => {
-        const checkInDate = new Date(checkInInput.value);
-        if (checkInDate) {
-            const nextDay = new Date(checkInDate);
-            nextDay.setDate(checkInDate.getDate() + 1);
-            checkOutInput.min = nextDay.toISOString().split('T')[0];
+        if (checkInInput.value) {
+            checkOutInput.min = getNextDayString(checkInInput.value);
             // Clear check-out if it's now invalid
-            if (checkOutInput.value && new Date(checkOutInput.value) <= checkInDate) {
+            if (checkOutInput.value && checkOutInput.value <= checkInInput.value) {
                 checkOutInput.value = '';
             }
+        } else {
+            checkOutInput.min = getLocalTodayString();
         }
         calculateTotalPrice();
     });
@@ -916,7 +1058,17 @@ if (availSearchBtn) {
         }
 
         // Search in activePromotionsList
-        const validPromo = window.activePromotionsList?.find(p => p.promoCode.toUpperCase() === code);
+        let validPromo = window.activePromotionsList?.find(p => p.promoCode.toUpperCase() === code);
+
+        // Fallback for the default WELCOME10 promo code
+        if (!validPromo && code === "WELCOME10") {
+            validPromo = {
+                title: "Special Opening Offer",
+                discountPercentage: 10,
+                promoCode: "WELCOME10",
+                expiryDate: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString()
+            };
+        }
 
         if (validPromo) {
             appliedPromo = validPromo;
@@ -1072,13 +1224,13 @@ if (availSearchBtn) {
             return;
         }
 
-        const today = new Date().toISOString().split('T')[0];
-        if (checkInDate < today) {
+        const localTodayStr = getLocalTodayString();
+        if (checkInDate < localTodayStr) {
             await window.showCustomAlert("Validation Error", "Check-in date cannot be in the past.", "warning");
             return;
         }
 
-        if (new Date(checkInDate) >= new Date(checkOutDate)) {
+        if (checkInDate >= checkOutDate) {
             await window.showCustomAlert("Validation Error", "Check-out date must be after check-in date.", "warning");
             return;
         }
@@ -1122,27 +1274,24 @@ if (availSearchBtn) {
     });
 
     // ---------------------------
-    // BACK TO TOP BUTTON
+    // STICKY NAVIGATION HEADER
     // ---------------------------
-    const backToTopBtn = document.getElementById('backToTop');
+    const siteHeader = document.querySelector('.site-header');
 
-    if (backToTopBtn) {
-        // Show/hide button based on scroll position
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 300) {
-                backToTopBtn.classList.add('show');
+    if (siteHeader) {
+        const toggleStickyHeader = () => {
+            if (window.scrollY > 50) {
+                siteHeader.classList.add('scrolled');
             } else {
-                backToTopBtn.classList.remove('show');
+                siteHeader.classList.remove('scrolled');
             }
-        });
+        };
 
-        // Smooth scroll to top
-        backToTopBtn.addEventListener('click', () => {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-        });
+        // Initial check in case page starts scrolled down
+        toggleStickyHeader();
+
+        // Throttle scroll listener slightly for better performance
+        window.addEventListener('scroll', toggleStickyHeader, { passive: true });
     }
 
 });

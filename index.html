@@ -18,33 +18,43 @@
 
 <body>
     <!-- Navbar -->
-    <nav class="navbar container">
-        <div class="nav-brand">
-            <a href="index.html">
-                <img src="assets/images/logo.svg" alt="KandyDawsonBungalow Logo" class="logo">
-                <h1>Kandy<span>DawsonBungalow</span></h1>
-            </a>
-        </div>
-        <button class="mobile-menu-btn" aria-label="Toggle mobile menu">
-            <span></span>
-            <span></span>
-            <span></span>
-        </button>
-        <ul class="nav-links">
-            <li><a href="index.html" class="active">Home</a></li>
-            <li><a href="rooms.html">Rooms</a></li>
-            <li><a href="about.html">About Us</a></li>
-            <li><a href="reviews.html">Reviews</a></li>
-            <li><a href="contact.html">Contact Us</a></li>
-        </ul>
-        <div class="nav-actions">
-            <a href="login.html" class="btn btn-outline">Log In</a>
-            <a href="register.html" class="btn btn-primary">Register</a>
-        </div>
-    </nav>
+    <header class="site-header">
+        <nav class="navbar container">
+            <div class="nav-brand">
+                <a href="index.html">
+                    <img src="assets/images/logo.svg" alt="KandyDawsonBungalow Logo" class="logo">
+                    <h1>Kandy<span>DawsonBungalow</span></h1>
+                </a>
+            </div>
+            <button class="mobile-menu-btn" aria-label="Toggle mobile menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul class="nav-links">
+                <li><a href="index.html" class="active">Home</a></li>
+                <li><a href="rooms.html">Rooms</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="reviews.html">Reviews</a></li>
+                <li><a href="contact.html">Contact Us</a></li>
+            </ul>
+            <div class="nav-actions">
+                <a href="login.html" class="btn btn-outline">Log In</a>
+                <a href="register.html" class="btn btn-primary">Register</a>
+            </div>
+        </nav>
+    </header>
 
     <!-- Hero Section -->
     <section class="hero">
+        
+        <div id="promotions-ribbon" class="promotions-ribbon-container">
+            <div id="promotions-ribbon-content" class="promotions-ribbon-content-wrap">
+                <!-- Dynamic promotion content will go here -->
+            </div>
+            <button id="close-promotions-ribbon" aria-label="Close promotion">&times;</button>
+        </div>
+
         <div class="hero-overlay"></div>
         <div class="hero-slideshow">
             <img src="assets/images/22.webp" alt="Slide 3" class="hero-slide">
@@ -137,14 +147,12 @@
                         <span>💼 Work Desk</span>
                         <span>🚿 Private Bathroom</span>
                     </div>
-                    <p style="color: var(--text-light); font-size: 0.95rem; margin-bottom: 1.5rem;">
-                        Wake up to the breathtaking views of the Kadugannawa pass. Perfect for couples seeking a
-                        romantic getaway.
-                    </p>
+
+                    
                     <div class="room-price">
                         <span>⭐ 4.8 <small style="font-size:0.8rem; color:var(--text-light); font-weight:normal;">guest
                                 rating</small></span>
-                        <a href="rooms.html" class="btn btn-outline" style="padding: 0.5rem 1rem;">View Details</a>
+
                     </div>
                 </div>
             </div>
@@ -167,13 +175,11 @@
                         <span>💼 Work Desk</span>
                         <span>🚿 Private Bathroom</span>
                     </div>
-                    <p style="color: var(--text-light); font-size: 0.95rem; margin-bottom: 1.5rem;">
-                        Cozy and comfortable with direct access to our lush, Perfect for couples seeking a romantic.
-                    </p>
+
                     <div class="room-price">
                         <span>⭐ 4.6 <small style="font-size:0.8rem; color:var(--text-light); font-weight:normal;">guest
                                 rating</small></span>
-                        <a href="rooms.html" class="btn btn-outline" style="padding: 0.5rem 1rem;">View Details</a>
+                       
                     </div>
                 </div>
             </div>
@@ -195,17 +201,23 @@
                         <span>💼 Work Desk</span>
                         <span>🚿 Private Bathroom</span>
                     </div>
-                    <p style="color: var(--text-light); font-size: 0.95rem; margin-bottom: 1.5rem;">
-                        Wake up to comfort in our spacious Family Room, designed for relaxing stays and quality time together. Perfect for families seeking a cozy and peaceful getaway.
-                    </p>
                     <div class="room-price">
-                        <span>⭐ 4.5 <small style="font-size:0.8rem; color:var(--text-light); font-weight:normal;">guest
+                        <span>⭐ 4.5 <small style="font-size:0.8rem; color:var(--text-light); font-weight:normal; ">guest
                                 rating</small></span>
-                        <a href="rooms.html" class="btn btn-outline" style="padding: 0.5rem 1rem;">View Details</a>
+                       
                     </div>
                 </div>
             </div>
+            
         </div>
+        <br>
+        <div style="text-align: center;">
+  <a href="rooms.html" 
+     class="btn btn-outline" 
+     style="padding: 0.5rem 3rem; display: inline-block; width: 200px; text-align: center;">
+    View Rooms
+  </a>
+</div>
     </section>
 
     <!-- Promotions Section -->
@@ -475,10 +487,7 @@
         </div>
     </footer>
 
-    <!-- Back to Top Button -->
-    <button id="backToTop" class="back-to-top" aria-label="Back to top">
-        <i class='bx bx-chevron-up'></i>
-    </button>
+
 
     <script src="assets/js/custom-alert.js"></script>
     <script src="assets/js/main.js"></script>
