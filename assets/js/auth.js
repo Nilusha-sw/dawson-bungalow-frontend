@@ -1,5 +1,5 @@
 // ─── Configuration ────────────────────────────────────────────────────────────
-const API_BASE = 'https://dawsonbunglow-production-1022.up.railway.app';
+const API_BASE = 'https://newdawson-production.up.railway.app';
 
 // ─── Token helpers ────────────────────────────────────────────────────────────
 function saveAuth(token, user) {

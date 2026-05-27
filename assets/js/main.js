@@ -2,7 +2,7 @@
 
 document.addEventListener('DOMContentLoaded', () => {
 
-    const API_BASE = "https://dawsonbunglow-production-1022.up.railway.app";
+    const API_BASE = "https://newdawson-production.up.railway.app";
 
     // Helper to get local date in YYYY-MM-DD format
     const getLocalTodayString = () => {

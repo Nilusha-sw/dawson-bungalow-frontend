@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     // API Configuration
-    const API_BASE_URL = 'https://dawsonbunglow-production-1022.up.railway.app/api/reviews'; 
+    const API_BASE_URL = 'https://newdawson-production.up.railway.app/api/reviews'; 
 
     let reviews = [];
     let isLoading = false;
@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const stars = document.querySelectorAll('.star-rating-input .star');
     const ratingInput = document.getElementById('review-rating');
 
-    // Check if user is admin
+    
     function isAdmin() {
         const user = JSON.parse(localStorage.getItem('user'));
         const isAdminUser = user && user.role === 'admin';
@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
         return isAdminUser;
     }
 
-    // Star Rating Logic
+    
     let currentRating = 0;
 
     stars.forEach(star => {
@@ -49,7 +49,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Render logic
+    
     async function renderReviews() {
         if (reviews.length === 0) {
             reviewsContainer.innerHTML = '<p style="text-align: center; color: var(--text-light);">No reviews yet. Be the first to leave one!</p>';
@@ -61,7 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
         let html = '';
         let totalScore = 0;
 
-        // Sort reviews by date descending (newest first)
+        
         const displayReviews = [...reviews].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
 
         displayReviews.forEach((review) => {
@@ -69,7 +69,7 @@ document.addEventListener('DOMContentLoaded', () => {
             
             totalScore += parseInt(review.rating);
 
-            // Generate Stars block
+            
             let starsHtml = '';
             for (let i = 1; i <= 5; i++) {
                 if (i <= review.rating) {
@@ -81,14 +81,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const initials = review.name.split(' ').map(n => n[0]).join('').toUpperCase().substring(0, 2);
 
-            // Format date
+            
             const reviewDate = new Date(review.createdAt).toLocaleDateString('en-US', { 
                 year: 'numeric', 
                 month: 'long', 
                 day: 'numeric' 
             });
 
-            // Admin delete button
+            
             const deleteButton = isAdmin() ? `<button class="delete-review-btn" data-id="${review.id}" title="Delete Review">🗑️</button>` : '';
 
             html += `

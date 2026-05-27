@@ -1,0 +1,295 @@
+/* ==========================================================================
+   CHATBOT LAUNCHER
+   ========================================================================== */
+
+#chatbot-launcher {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    z-index: 9999;
+}
+
+#chatbot-launcher.hidden {
+    display: none;
+}
+
+#chatbot-launcher button {
+    width: 60px;
+    height: 60px;
+    border: none;
+    border-radius: 50%;
+    overflow: hidden;
+    background: linear-gradient(135deg, #214f36, #2b6f4b);
+    cursor: pointer;
+    box-shadow: 0 8px 24px rgba(33, 79, 54, 0.35);
+    transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.25s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#chatbot-launcher button:hover {
+    transform: scale(1.08);
+    box-shadow: 0 12px 28px rgba(33, 79, 54, 0.45);
+}
+
+#chatbot-launcher button:active {
+    transform: scale(0.95);
+}
+
+#chatbot-launcher img {
+    width: 55%;
+    height: 55%;
+    object-fit: contain;
+}
+
+
+/* ==========================================================================
+   MODAL / CONTAINER OVERLAY
+   ========================================================================== */
+
+#chatbot-modal {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    padding: 24px 24px 100px 24px;
+    background: transparent;
+    z-index: 9998;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.25s ease, visibility 0.25s ease;
+}
+
+#chatbot-modal.show {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+}
+
+
+/* ==========================================================================
+   CHAT WINDOW CONTAINER (CLEANED EXPLICIT FLEX)
+   ========================================================================== */
+
+.chatbot-modal-content {
+    width: 340px;
+    height: 430px; 
+    background: #ffffff;
+    border-radius: 24px;
+    overflow: hidden; 
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    box-shadow: 0 14px 35px rgba(0,0,0,.18);
+    transform: translateY(20px) scale(0.95);
+    transition: transform 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.chat-container {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    overflow: hidden;
+}
+
+#chatbot-modal.show .chatbot-modal-content {
+    transform: translateY(0) scale(1);
+}
+
+
+/* ==========================================================================
+   CLOSE BUTTON
+   ========================================================================== */
+
+#chatbot-close {
+    position: absolute;
+    top: 16px;
+    right: 15px;
+    width: 22px;
+    height: 22px;
+    border: none;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.05);
+    color: #1a3a28;
+    font-size: 18px;
+    line-height: 1;
+    cursor: pointer;
+    z-index: 20;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s ease, transform 0.2s ease;
+}
+
+#chatbot-close:hover {
+    background: rgba(0, 0, 0, 0.1);
+    transform: rotate(90deg);
+}
+
+
+/* ==========================================================================
+   HEADER
+   ========================================================================== */
+
+.chat-header {
+    background: #ffffff;
+    color: #214f36; 
+    border-bottom: 1px solid #f0f4f1;
+    min-height: 76px;
+    padding: 18px 20px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    box-sizing: border-box;
+    flex-shrink: 0;
+}
+
+.bot-avatar {
+    width: 52px;
+    height: 42px;
+    border-radius: 50%;
+    overflow: hidden;
+    background: #eaf2ee;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.bot-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.header-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.header-info h1 {
+    margin: 0;
+    font-size: 15px;
+    font-weight: 600;
+    color: #1a3a28;
+    line-height: 1.2;
+}
+
+.header-info p {
+    margin: 4px 0 0 0;
+    font-size: 12px;
+    color: #60786a;
+}
+
+
+/* ==========================================================================
+   CHAT BODY (scrollable message area)
+   ========================================================================== */
+.chat-body {
+    flex: 1 1 auto;          /* take up all remaining space */
+    overflow-y: auto;        /* scroll instead of overflow */
+    padding: 12px 16px;      /* breathing room around messages */
+    box-sizing: border-box;
+    background: #f8faf9;     /* optional subtle background */
+}
+
+
+
+
+/* ==========================================================================
+   FOOTER & INPUTS
+   ========================================================================== */
+
+.chat-footer {
+    padding: 14px 16px;
+    border-top: 1px solid #f0f4f1;
+    background: #ffffff;
+    flex-shrink: 0;
+}
+
+#chat-form {
+    display: grid;
+    grid-template-columns: 1fr 38px 38px;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+}
+
+#user-input {
+    width: 100%;
+    min-width: 0;
+    height: 38px;
+    border: 1px solid #e0e6e2;
+    border-radius: 20px;
+    padding: 0 16px;
+    font-size: 13px;
+    color: #2d3732;
+    outline: none;
+    box-sizing: border-box;
+    background: #f8faf9;
+    transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+#user-input::placeholder {
+    color: #90a498;
+}
+
+#user-input:focus {
+    border-color: #214f36;
+    background: #ffffff;
+}
+
+/* BUTTONS (MIC & SEND) */
+
+#mic-btn,
+#send-btn {
+    width: 38px;
+    height: 38px;
+    padding: 0;
+    margin: 0;
+    border: none;
+    border-radius: 50%;
+    background: #214f36;
+    color: #ffffff;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    flex: none;
+    transition: background 0.2s ease, transform 0.1s ease;
+}
+
+#mic-btn {
+    background: #eaf2ee;
+    color: #214f36;
+}
+
+#mic-btn:hover {
+    background: #dbeae2;
+}
+
+#send-btn:hover {
+    background: #183b28;
+}
+
+#mic-btn:active,
+#send-btn:active {
+    transform: scale(0.92);
+}
+
+#mic-btn svg,
+#send-btn svg {
+    width: 16px;
+    height: 16px;
+    display: block;
+    fill: currentColor;
+}
+
+#mic-btn svg path,
+#send-btn svg path {
+    vector-effect: non-scaling-stroke;
+}
