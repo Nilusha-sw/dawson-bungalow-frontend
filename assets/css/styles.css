@@ -1030,7 +1030,15 @@ footer {
   }
 
   .site-header.scrolled {
-    width: 92%;
+    width: 100%;
+    transform: none;
+  }
+
+  .site-header.scrolled::before {
+    border-radius: 0;
+    border-left: none;
+    border-right: none;
+    border-top: none;
   }
 
   .site-header.scrolled .navbar {
