@@ -369,13 +369,8 @@
 
 @media screen and (max-width: 480px) {
 
-    #chatbot-launcher {
-        bottom: 16px;
-        right: 16px;
-    }
-
     #chatbot-modal {
-        padding: 12px;
+        padding: 10px;
         align-items: flex-end;
         justify-content: center;
         box-sizing: border-box;
@@ -383,48 +378,74 @@
 
     .chatbot-modal-content {
         width: 100%;
-        max-width: 100%;
-        height: min(75vh, 620px);
-        max-height: 75vh;
+        height: 72vh;
+        max-height: 72vh;
 
-        border-radius: 20px;
+        border-radius: 22px;
 
-        overflow: hidden;
         display: flex;
         flex-direction: column;
+        overflow: hidden;
     }
 
+    /* HEADER */
     .chat-header {
-        min-height: 68px;
+        min-height: 72px;
         padding: 14px 16px;
+        flex-shrink: 0;
     }
 
+    /* BODY */
     .chat-body {
         flex: 1 1 auto;
         min-height: 0;
         overflow-y: auto;
-        padding: 12px;
+
+        padding: 14px;
     }
 
+    /* FOOTER */
     .chat-footer {
-        padding: 12px;
+        padding: 12px 14px;
+        flex-shrink: 0;
+        background: #fff;
+    }
+
+    /* FORM LAYOUT */
+    #chat-form {
+        display: grid;
+        grid-template-columns: 1fr 44px;
+        gap: 10px;
+        align-items: center;
+    }
+
+    /* INPUT */
+    #user-input {
+        height: 44px;
+        font-size: 14px;
+        padding: 0 16px;
+    }
+
+    /* SEND BUTTON */
+    #send-btn {
+        position: relative; /* IMPORTANT FIX */
+        right: auto;
+        top: auto;
+        transform: none;
+
+        width: 44px;
+        height: 44px;
+
         flex-shrink: 0;
     }
 
-    #chat-form {
-        grid-template-columns: 1fr 36px 36px;
-        gap: 6px;
+    #send-btn:hover {
+        transform: scale(1.03);
     }
 
-    #user-input {
-        height: 40px;
-        font-size: 14px;
-    }
-
-    #mic-btn,
-    #send-btn {
-        width: 36px;
-        height: 36px;
+    /* REMOVE OVERLAP */
+    #send-btn svg {
+        width: 18px;
+        height: 18px;
     }
 }
-
