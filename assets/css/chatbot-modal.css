@@ -373,9 +373,9 @@
     }
 
     .chatbot-modal-content {
-        width: calc(50vw - 40px);
-        height: 380px;
-        margin-bottom: 40px; /* pushes chat box up above the floating button */
+        width: calc(100vw - 40px);
+        height: 400px;
+        margin-bottom: 30px; /* pushes chat box up above the floating button */
     }
 }
 
