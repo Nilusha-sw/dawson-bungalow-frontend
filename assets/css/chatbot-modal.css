@@ -368,12 +368,63 @@
    ========================================================================== */
 
 @media screen and (max-width: 480px) {
+
+    #chatbot-launcher {
+        bottom: 16px;
+        right: 16px;
+    }
+
     #chatbot-modal {
-        padding: 12px 12px 88px 12px;
+        padding: 12px;
+        align-items: flex-end;
+        justify-content: center;
+        box-sizing: border-box;
     }
 
     .chatbot-modal-content {
-        width: calc(100vw - 24px);
-        height: 420px;
+        width: 100%;
+        max-width: 100%;
+        height: min(75vh, 620px);
+        max-height: 75vh;
+
+        border-radius: 20px;
+
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .chat-header {
+        min-height: 68px;
+        padding: 14px 16px;
+    }
+
+    .chat-body {
+        flex: 1 1 auto;
+        min-height: 0;
+        overflow-y: auto;
+        padding: 12px;
+    }
+
+    .chat-footer {
+        padding: 12px;
+        flex-shrink: 0;
+    }
+
+    #chat-form {
+        grid-template-columns: 1fr 36px 36px;
+        gap: 6px;
+    }
+
+    #user-input {
+        height: 40px;
+        font-size: 14px;
+    }
+
+    #mic-btn,
+    #send-btn {
+        width: 36px;
+        height: 36px;
     }
 }
+
