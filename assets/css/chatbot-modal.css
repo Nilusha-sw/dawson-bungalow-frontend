@@ -368,84 +368,14 @@
    ========================================================================== */
 
 @media screen and (max-width: 480px) {
-
     #chatbot-modal {
-        padding: 10px;
-        align-items: flex-end;
-        justify-content: center;
-        box-sizing: border-box;
+        padding: 12px 12px 88px 12px;
     }
 
     .chatbot-modal-content {
-        width: 100%;
-        height: 72vh;
-        max-height: 72vh;
-
-        border-radius: 22px;
-
-        display: flex;
-        flex-direction: column;
-        overflow: hidden;
-    }
-
-    /* HEADER */
-    .chat-header {
-        min-height: 72px;
-        padding: 14px 16px;
-        flex-shrink: 0;
-    }
-
-    /* BODY */
-    .chat-body {
-        flex: 1 1 auto;
-        min-height: 0;
-        overflow-y: auto;
-
-        padding: 14px;
-    }
-
-    /* FOOTER */
-    .chat-footer {
-        padding: 12px 14px;
-        flex-shrink: 0;
-        background: #fff;
-    }
-
-    /* FORM LAYOUT */
-    #chat-form {
-        display: grid;
-        grid-template-columns: 1fr 44px;
-        gap: 10px;
-        align-items: center;
-    }
-
-    /* INPUT */
-    #user-input {
-        height: 44px;
-        font-size: 14px;
-        padding: 0 16px;
-    }
-
-    /* SEND BUTTON */
-    #send-btn {
-        position: relative; /* IMPORTANT FIX */
-        right: auto;
-        top: auto;
-        transform: none;
-
-        width: 44px;
-        height: 44px;
-
-        flex-shrink: 0;
-    }
-
-    #send-btn:hover {
-        transform: scale(1.03);
-    }
-
-    /* REMOVE OVERLAP */
-    #send-btn svg {
-        width: 18px;
-        height: 18px;
+        width: calc(100vw - 40px);
+        height: 340px;
+        margin-bottom: 70px; /* pushes chat box up above the floating button */
     }
 }
+
