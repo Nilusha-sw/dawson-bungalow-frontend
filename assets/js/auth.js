@@ -1,5 +1,5 @@
 // ─── Configuration ────────────────────────────────────────────────────────────
-const API_BASE = 'https://dawson-bungalow-api-latest.onrender.com';
+const API_BASE = 'https://newdawson-production.up.railway.app';
 
 // ─── Token helpers ────────────────────────────────────────────────────────────
 function saveAuth(token, user) {

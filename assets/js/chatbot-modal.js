@@ -100,7 +100,7 @@ document.addEventListener("keydown", (e) => {
 // ---------------------------------------------------------------------------
 
 function initChat() {
-    const API_URL    = "https://dawson-bungalow-api-latest.onrender.com";
+    const API_URL    = "https://newdawson-production.up.railway.app";
     const chatForm   = document.getElementById("chat-form");
     const userInput  = document.getElementById("user-input");
     const chatBody   = document.getElementById("chat-body");
