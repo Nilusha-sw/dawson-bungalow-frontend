@@ -25,7 +25,7 @@ const AMENITY_ICONS = {
     "Private Bathroom": "🚿 Private Bathroom"
 };
 
-const API_BASE = "https://newdawson-production.up.railway.app";
+const API_BASE = "https://dawson-bungalow-api-latest.onrender.com";
 const token = localStorage.getItem("token");
 
 // Utility function to escape HTML

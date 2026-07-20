@@ -1,4 +1,4 @@
-const API_BASE = "https://newdawson-production.up.railway.app";
+const API_BASE = "https://dawson-bungalow-api-latest.onrender.com";
 
 document.addEventListener("DOMContentLoaded", () => {
     
